@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         Vector2 checkPos = new Vector2
             (gameObject.transform.position.x + GroundCheck.x,
             gameObject.transform.position.y + GroundCheck.y);
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPos, 0.05f, Ground);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(checkPos, new Vector2(0.4f,0.05f), Ground);
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)

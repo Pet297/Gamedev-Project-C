@@ -8,12 +8,16 @@ public class HealthPointsScript : MonoBehaviour
     public int MaxHealth = 100;
 
     public float InvincibilitySeconds = 1.0f;
+    public GameObject HealthBar = null;
+    private HealthBarScript hbs = null;
+
     float timeSinceHit = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
         health = MaxHealth;
+        if (HealthBar != null) hbs = HealthBar.GetComponent<HealthBarScript>();
     }
 
     // Update is called once per frame
@@ -26,15 +30,17 @@ public class HealthPointsScript : MonoBehaviour
     {
         health += value;
         if (health > MaxHealth) health = MaxHealth;
+        UpdateHealthBar();
     }
     public void Decrease(int value)
     {
         health -= value;
-        if (health < 0)
+        if (health <= 0)
         {
             health = 0;
             GameObject.Destroy(gameObject);
         }
+        UpdateHealthBar();
     }
     public void GetHit(int damage)
     {
@@ -48,11 +54,18 @@ public class HealthPointsScript : MonoBehaviour
     public void IncreaseRelative(float percentage)
     {
         health += (int)(percentage * MaxHealth);
+        UpdateHealthBar();
     }
     public void IncreaseMax(int value)
     {
         MaxHealth += value;
         health += value;
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        hbs?.SetPercentage(Percentage);
     }
 
     public int Health => health;

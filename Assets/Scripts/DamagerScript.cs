@@ -7,22 +7,32 @@ public class DamagerScript : MonoBehaviour
     public LayerMask AffectedLayer;
     public int DealtDamage = 20;
 
-    BoxCollider2D collider;
+    Collider2D collider;
 
     // Start is called before the first frame update
     void Start()
     {
-        collider = (gameObject.GetComponent(typeof(BoxCollider2D)) as BoxCollider2D);
+        collider = (gameObject.GetComponent(typeof(Collider2D)) as Collider2D);
     }
-
+    
     // Update is called once per frame
     void Update()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), new Vector2(collider.bounds.size.x / 2, collider.bounds.size.y / 2), AffectedLayer);
+        /*Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), new Vector2(collider.bounds.size.x / 2, collider.bounds.size.y / 2), AffectedLayer);
         foreach (Collider2D c in colliders)
         {
             HealthPointsScript hps = (c.GetComponent(typeof(HealthPointsScript)) as HealthPointsScript);
             if (hps != null) hps.GetHit(DealtDamage);
+        }*/
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (((1 << collision.collider.gameObject.layer) & AffectedLayer.value) > 0 )
+        {
+            HealthPointsScript hps = (collision.collider.GetComponent(typeof(HealthPointsScript)) as HealthPointsScript);
+            if (hps != null) hps.GetHit(DealtDamage);
+            this.gameObject.SetActive(false);
         }
     }
 }

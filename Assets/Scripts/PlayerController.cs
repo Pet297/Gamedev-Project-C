@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float JumpForce = 450f;
-    public float MaxSpeed = 12f;
+    public float JumpForce = 3f;
+    public float Gravity = 0.05f;
+    public float MaxSpeed = 0.05f;
     public Vector2 GroundCheck;
     public LayerMask Ground;
+
+    //custom gravity impl
+    float spdY = -0.2f;
 
     private Rigidbody2D rigidbody2D;
     bool touchesGround = false;
@@ -32,11 +36,15 @@ public class PlayerController : MonoBehaviour
         bool landed = !touchesGround && touchesGroundNow;
         bool fell = touchesGround && !touchesGroundNow;
 
-        if (jump && touchesGround) gameObject.transform.Translate(0, 0.06f, 0);
+        //if (jump && touchesGround) gameObject.transform.Translate(0, 0.001f, 0);
 
         UpdateState(jump, landed, fell);
 
-        rigidbody2D.velocity = new Vector3(horizontalMove, rigidbody2D.velocity.y + 0.01f, 0);
+        /*if (!touchesGround)*/ rigidbody2D.MovePosition(transform.position + new Vector3(horizontalMove, /*rigidbody2D.velocity.y + 0.01f*/ spdY, 0));
+        //else rigidbody2D.MovePosition(transform.position + new Vector3(horizontalMove, 0.01f, 0));
+
+        spdY -= Gravity;
+        if (spdY < -0.2f) spdY = -0.2f;
 
         touchesGround = touchesGroundNow;
         jump = false;
@@ -89,7 +97,8 @@ public class PlayerController : MonoBehaviour
             switch (currentState)
             {
                 case PlayerState.JUMP:
-                    rigidbody2D.AddForce(new Vector2(0f, JumpForce));
+                    //rigidbody2D.AddForce(new Vector2(0f, JumpForce));
+                    spdY = JumpForce;
                     break;
             }
         }

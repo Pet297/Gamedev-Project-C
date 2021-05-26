@@ -16,11 +16,15 @@ public class CollectibleScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), new Vector2(0.5f, 0.5f), PlayerLayer);
-        foreach (Collider2D c in colliders)
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (((1 << collision.collider.gameObject.layer) & PlayerLayer.value) > 0)
         {
-            (c.GetComponent(typeof(CollectorScript)) as CollectorScript).Collect(CollectibleType);
+            CollectorScript cs = collision.collider.GetComponent<CollectorScript>();
+            cs.Collect(CollectibleType);
+            GameObject.Destroy(gameObject);
         }
-        if (colliders.Length > 0) GameObject.Destroy(gameObject);
     }
 }

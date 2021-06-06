@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 GroundCheck;
     public LayerMask Ground;
 
+    private Animator animator;
     //custom gravity impl
     float spdY = -0.2f;
 
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        animator = gameObject.GetComponent<Animator>();
     }
 
     bool jump = false;
@@ -33,12 +35,15 @@ public class PlayerController : MonoBehaviour
         bool touchesGroundNow = CheckGroundCollision();
 
         float horizontalMove = Input.GetAxisRaw("Horizontal") * MaxSpeed;
+        float verticalAxis = Input.GetAxisRaw("Vertical");
+
         bool landed = !touchesGround && touchesGroundNow;
         bool fell = touchesGround && !touchesGroundNow;
+        bool crouching = verticalAxis < -0.5f;
 
         //if (jump && touchesGround) gameObject.transform.Translate(0, 0.001f, 0);
 
-        UpdateState(jump, landed, fell);
+        UpdateState(jump, landed, fell, crouching);
 
         /*if (!touchesGround)*/ rigidbody2D.MovePosition(transform.position + new Vector3(horizontalMove, /*rigidbody2D.velocity.y + 0.01f*/ spdY, 0));
         //else rigidbody2D.MovePosition(transform.position + new Vector3(horizontalMove, 0.01f, 0));
@@ -80,35 +85,137 @@ public class PlayerController : MonoBehaviour
      * 
      */
 
-    public enum PlayerState { STAND, JUMP, LAND, FALL, JUMP_ATK, CLIMB, ATK, CROUCH, CROUCH_ATK, AIM, SHOOT }
+    public enum PlayerState { STAND, CROUCH, CROUCH_ATK, CROUCH_MOVE, ATK, ITEM, BOW, BOW_SHOOT, JUMP, LAND, JUMP_ATK, CLIMB, FALL }
 
     void EnterState(PlayerState newState)
     {
         if (newState != currentState)
         {
-            // leave state
+            // LEAVE OLD
             switch (currentState)
             {
             }
 
             currentState = newState;
 
-            // enter state
+            // ENTER NEW
             switch (currentState)
             {
                 case PlayerState.JUMP:
-                    //rigidbody2D.AddForce(new Vector2(0f, JumpForce));
                     spdY = JumpForce;
                     break;
             }
+
+            // SET ANIMATOR
+            switch (currentState)
+            {
+                case PlayerState.STAND:
+                    animator.SetBool("Move", false);
+                    animator.SetBool("Crouch", false);
+                    animator.SetBool("Inventory", false);
+                    animator.SetBool("Bow", false);
+                    animator.SetInteger("BowAngle", 0);
+                    animator.SetBool("Attack", false);
+                    animator.SetBool("Jump", false);
+                    animator.SetBool("Jump2", false);
+                    animator.SetBool("Land", false);
+                    animator.SetBool("Climb", false);
+                    break;
+                case PlayerState.JUMP:
+                    animator.SetBool("Move", false);
+                    animator.SetBool("Crouch", false);
+                    animator.SetBool("Inventory", false);
+                    animator.SetBool("Bow", false);
+                    animator.SetInteger("BowAngle", 0);
+                    animator.SetBool("Attack", false);
+                    animator.SetBool("Jump", true);
+                    animator.SetBool("Jump2", false);
+                    animator.SetBool("Land", false);
+                    animator.SetBool("Climb", false);
+                    break;
+                case PlayerState.FALL:
+                    animator.SetBool("Move", false);
+                    animator.SetBool("Crouch", false);
+                    animator.SetBool("Inventory", false);
+                    animator.SetBool("Bow", false);
+                    animator.SetInteger("BowAngle", 0);
+                    animator.SetBool("Attack", false);
+                    animator.SetBool("Jump", true);
+                    animator.SetBool("Jump2", false);
+                    animator.SetBool("Land", false);
+                    animator.SetBool("Climb", false);
+                    break;
+                case PlayerState.LAND:
+                    animator.SetBool("Move", false);
+                    animator.SetBool("Crouch", false);
+                    animator.SetBool("Inventory", false);
+                    animator.SetBool("Bow", false);
+                    animator.SetInteger("BowAngle", 0);
+                    animator.SetBool("Attack", false);
+                    animator.SetBool("Jump", false);
+                    animator.SetBool("Jump2", false);
+                    animator.SetBool("Land", true);
+                    animator.SetBool("Climb", false);
+                    break;
+                case PlayerState.CROUCH:
+                    animator.SetBool("Move", false);
+                    animator.SetBool("Crouch", true);
+                    animator.SetBool("Inventory", false);
+                    animator.SetBool("Bow", false);
+                    animator.SetInteger("BowAngle", 0);
+                    animator.SetBool("Attack", false);
+                    animator.SetBool("Jump", false);
+                    animator.SetBool("Jump2", false);
+                    animator.SetBool("Land", false);
+                    animator.SetBool("Climb", false);
+                    break;
+                case PlayerState.CROUCH_ATK:
+                    animator.SetBool("Move", false);
+                    animator.SetBool("Crouch", true);
+                    animator.SetBool("Inventory", false);
+                    animator.SetBool("Bow", false);
+                    animator.SetInteger("BowAngle", 0);
+                    animator.SetBool("Attack", true);
+                    animator.SetBool("Jump", false);
+                    animator.SetBool("Jump2", false);
+                    animator.SetBool("Land", false);
+                    animator.SetBool("Climb", false);
+                    break;
+                case PlayerState.CROUCH_MOVE:
+                    animator.SetBool("Move", true);
+                    animator.SetBool("Crouch", true);
+                    animator.SetBool("Inventory", false);
+                    animator.SetBool("Bow", false);
+                    animator.SetInteger("BowAngle", 0);
+                    animator.SetBool("Attack", false);
+                    animator.SetBool("Jump", false);
+                    animator.SetBool("Jump2", false);
+                    animator.SetBool("Land", false);
+                    animator.SetBool("Climb", false);
+                    break;
+                case PlayerState.CLIMB:
+                    animator.SetBool("Move", false);
+                    animator.SetBool("Crouch", false);
+                    animator.SetBool("Inventory", false);
+                    animator.SetBool("Bow", false);
+                    animator.SetInteger("BowAngle", 0);
+                    animator.SetBool("Attack", false);
+                    animator.SetBool("Jump", false);
+                    animator.SetBool("Jump2", false);
+                    animator.SetBool("Land", false);
+                    animator.SetBool("Climb", true);
+                    break;
+
+            }
         }
     }
-    void UpdateState(bool jump, bool landed, bool fell)
+    void UpdateState(bool jump, bool landed, bool fell, bool crouching)
     {
         switch (currentState)
         {
             case PlayerState.STAND:
                 if (jump) EnterState(PlayerState.JUMP);
+                else if (crouching) EnterState(PlayerState.CROUCH);
                 else if (fell) EnterState(PlayerState.FALL);
                 break;
             case PlayerState.JUMP:
@@ -116,6 +223,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.FALL:
                 if (landed) EnterState(PlayerState.STAND);
+                break;
+            case PlayerState.CROUCH:
+                if (!crouching) EnterState(PlayerState.STAND);
                 break;
         }
     }

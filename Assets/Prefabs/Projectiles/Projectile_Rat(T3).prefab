@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 8590510003925742470}
   - component: {fileID: 8590510003925742469}
   - component: {fileID: 8590510003925742468}
+  - component: {fileID: 1560791901980740158}
+  - component: {fileID: -255093839490381331}
+  - component: {fileID: 3578910385307866915}
   m_Layer: 10
   m_Name: Projectile_Rat(T3)
   m_TagString: Untagged
@@ -102,3 +105,47 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1560791901980740158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8590510003925742467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b2822065744f54fb922808c9d6ca90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedX: 5
+  SpeedY: 0
+--- !u!114 &-255093839490381331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8590510003925742467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ddf85cf1046ce2478c4316f34c30fbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 0
+  Duration: 5
+--- !u!58 &3578910385307866915
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8590510003925742467}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

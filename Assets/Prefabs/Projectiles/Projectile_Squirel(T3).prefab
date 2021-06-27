@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6849779754751756708}
   - component: {fileID: 1698712999218334859}
   - component: {fileID: 3632674391308298861}
-  - component: {fileID: 4168633466843643561}
+  - component: {fileID: 8669929796410594935}
   m_Layer: 10
   m_Name: Projectile_Squirel(T3)
   m_TagString: Untagged
@@ -137,7 +137,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &4168633466843643561
+--- !u!114 &8669929796410594935
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,6 +146,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6849779754751756709}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb8fa4995a48aa040839c7231b99fd34, type: 3}
+  m_Script: {fileID: 11500000, guid: b2b2822065744f54fb922808c9d6ca90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpeedX: 5
+  SpeedY: 0

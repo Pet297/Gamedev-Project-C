@@ -48,12 +48,11 @@ public class SquirelControlerScript : MonoBehaviour
     public void Throw()
     {
         bool flipX = renderer.flipX;
-        // LOG SPAWN
         GameObject magic = pool.GetPooledObject();
         if (magic != null)
         {
             magic.transform.position = gameObject.transform.position;
-            /*magic.GetComponent<MouseProjectileScript>().ResetTarget(Player);*/
+            magic.GetComponent<RatProjectileScript>().ResetTarget(Player);
             magic.SetActive(true);
         }
 

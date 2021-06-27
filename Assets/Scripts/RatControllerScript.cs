@@ -48,13 +48,13 @@ public class RatControllerScript : MonoBehaviour
     public void Throw()
     {
         bool flipX = renderer.flipX;
+        GameObject magic = pool.GetPooledObject();
 
-        GameObject poison = pool.GetPooledObject();
-        if (poison != null)
+        if (magic != null)
         {
-            poison.transform.position = gameObject.transform.position;
-            //nastavit speed x a y podle pozice hr·Ëe
-            poison.SetActive(true);
+            magic.transform.position = gameObject.transform.position;
+            magic.GetComponent<RatProjectileScript>().ResetTarget(Player);
+            magic.SetActive(true);
         }
 
 

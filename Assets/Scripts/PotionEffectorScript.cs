@@ -45,6 +45,7 @@ public class PotionEffectorScript : MonoBehaviour
                     pe.ApplyStrength(Duration);
                     break;
             }
+            this.gameObject.SetActive(false);
         }
     }
 }

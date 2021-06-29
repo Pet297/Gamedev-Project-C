@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5572953141369412266}
   - component: {fileID: 9093230292106714442}
   - component: {fileID: 1409519000658309165}
+  - component: {fileID: -5517137398984022851}
   m_Layer: 6
   m_Name: Beaver(T3)
   m_TagString: Untagged
@@ -182,3 +183,18 @@ MonoBehaviour:
   poolInstance: B3
   objectToPool: {fileID: 3859455011217188956, guid: f93d82b95774ed94293e57f71e1498be, type: 3}
   amountToPool: 10
+--- !u!114 &-5517137398984022851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7444166165663122139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8ae99f65de53d4c96ad5ccd5d52772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 750
+  InvincibilitySeconds: 0.4
+  HealthBar: {fileID: 0}

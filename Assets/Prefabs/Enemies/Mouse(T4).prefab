@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 981926266296103554}
   - component: {fileID: 3880950466466548079}
   - component: {fileID: 8054264141422505371}
+  - component: {fileID: -1514563426347825370}
   m_Layer: 6
   m_Name: Mouse(T4)
   m_TagString: Untagged
@@ -151,3 +152,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-1514563426347825370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981926266296103555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8ae99f65de53d4c96ad5ccd5d52772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 1200
+  InvincibilitySeconds: 0.4
+  HealthBar: {fileID: 0}

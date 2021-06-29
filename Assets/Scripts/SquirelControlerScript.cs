@@ -6,6 +6,7 @@ public class SquirelControlerScript : MonoBehaviour
 {
     public float AttackFrequency = 4.0f;
     public float AttackDelay = 1.0f;
+    public GameObject ShootOrigin;
 
     private GameObject Player;
 
@@ -49,10 +50,15 @@ public class SquirelControlerScript : MonoBehaviour
     {
         bool flipX = renderer.flipX;
         GameObject magic = pool.GetPooledObject();
+
         if (magic != null)
         {
-            magic.transform.position = gameObject.transform.position;
-            magic.GetComponent<RatProjectileScript>().ResetTarget(Player);
+            Vector2 toTarget = new Vector2(Player.transform.position.x - ShootOrigin.transform.position.x, Player.transform.position.y - ShootOrigin.transform.position.y);
+            Vector2 toTarget2 = new Vector2(toTarget.x, toTarget.y + toTarget.magnitude / 6f);
+            toTarget2 = 12 * toTarget2.normalized;
+
+            magic.transform.position = ShootOrigin.transform.position;
+            magic.GetComponent<RatProjectileScript>().ResetTarget(Player, toTarget2.x, toTarget2.y, -2);
             magic.SetActive(true);
         }
 

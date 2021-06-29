@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class RatProjectileScript : MonoBehaviour
 {
-    public float SpeedX = 5f;
-    public float SpeedY = 0f;
-
+    float SpeedX = 5f;
+    float SpeedY = 0f;
     float GravityY = -2f;
-    private GameObject Player;
+
+    GameObject Player;
 
     // Start is called before the first frame update
     void Start()
@@ -29,10 +29,11 @@ public class RatProjectileScript : MonoBehaviour
         }
     }
 
-    public void ResetTarget(GameObject go)
+    public void ResetTarget(GameObject go, float spdx, float spdy, float gravity)
     {
         Player = go;
-        SpeedY = 0f;
-        SpeedX = 5f;
+        SpeedX = spdx;
+        SpeedY = spdy;
+        GravityY = gravity;
     }
 }

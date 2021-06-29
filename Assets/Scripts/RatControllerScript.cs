@@ -52,8 +52,12 @@ public class RatControllerScript : MonoBehaviour
 
         if (magic != null)
         {
+            Vector2 toTarget = new Vector2(Player.transform.position.x - gameObject.transform.position.x, Player.transform.position.y - gameObject.transform.position.y);
+            Vector2 toTarget2 = new Vector2(toTarget.x, toTarget.y + toTarget.magnitude / 6f);
+            toTarget2 = 7 * toTarget2.normalized;
+
             magic.transform.position = gameObject.transform.position;
-            magic.GetComponent<RatProjectileScript>().ResetTarget(Player);
+            magic.GetComponent<RatProjectileScript>().ResetTarget(Player, toTarget2.x, toTarget2.y, -2);
             magic.SetActive(true);
         }
 

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2809245014485232720}
   - component: {fileID: 2543364472646937110}
   - component: {fileID: 6053124869649097529}
+  - component: {fileID: -9061509123949309664}
   m_Layer: 6
   m_Name: Mouse(T3)
   m_TagString: Untagged
@@ -180,5 +181,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolInstance: M3
-  objectToPool: {fileID: 8488303300170413341}
+  objectToPool: {fileID: 7762867990017046775, guid: 0e66020fcc4b92a45ab2cbeb7466c266, type: 3}
   amountToPool: 10
+--- !u!114 &-9061509123949309664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8488303300170413341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8ae99f65de53d4c96ad5ccd5d52772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 125
+  InvincibilitySeconds: 0.4
+  HealthBar: {fileID: 0}

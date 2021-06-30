@@ -7,6 +7,7 @@ public class CollectorScript : MonoBehaviour
     GameScoreScript gss;
     HealthPointsScript hps;
     PlayerInventoryScript pis;
+    PlayerController pc;
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +15,7 @@ public class CollectorScript : MonoBehaviour
         gss = gameObject.GetComponent<GameScoreScript>();
         hps = gameObject.GetComponent<HealthPointsScript>();
         pis = gameObject.GetComponent<PlayerInventoryScript>();
+        pc = gameObject.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,9 @@ public class CollectorScript : MonoBehaviour
             case "PV_10000": gss.Increase(10000); break;
 
             case "BO_H": hps.IncreaseMax(15); break;
+            case "BO_J": pc.IncreaseJumpHeight(); break;
+            case "BO_D": pc.IncreaseAttackMult(); break;
+
             default: pis.AddItem(item); break;
         }
     }

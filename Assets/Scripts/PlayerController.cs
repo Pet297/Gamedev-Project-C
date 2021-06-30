@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float JumpForce = 3f;
+    public float JumpForce = 1.3f;
     public float Gravity = 0.05f;
     public float MaxSpeed = 0.05f;
     public Vector2 GroundCheck;
@@ -15,18 +15,24 @@ public class PlayerController : MonoBehaviour
 
     public GameObject AttackL;
     public GameObject AttackR;
+    public GameObject InventoryObject;
 
     private Rigidbody2D rigidbody2D;
     private SpriteRenderer renderer;
     private Animator animator;
+    private DamagerScript damagerR;
+    private DamagerScript damagerL;
 
     private TemporalEnablerScript attackR;
     private TemporalEnablerScript attackL;
     bool touchesGround = false;
+    bool inventoryVisible = false;
     PlayerState currentState = PlayerState.STAND;
 
     private void Awake()
     {
+        damagerR = AttackR.GetComponent<DamagerScript>();
+        damagerL = AttackL.GetComponent<DamagerScript>();
         attackR = AttackR.GetComponent<TemporalEnablerScript>();
         attackL = AttackL.GetComponent<TemporalEnablerScript>();
 
@@ -37,11 +43,18 @@ public class PlayerController : MonoBehaviour
 
     bool jump = false;
     bool attack = false;
+    bool item = false;
+    bool bow = false;
     float stateTimer = 0f;
     void Update()
     {
+
+        if (Input.GetMouseButtonDown(1)) inventoryVisible = !inventoryVisible;
+        InventoryObject.SetActive(inventoryVisible);
+
         jump = jump || Input.GetButtonDown("Jump");
         attack = attack || Input.GetButtonDown("Fire1");
+        if (inventoryVisible) attack = false;
 
         stateTimer += Time.deltaTime;
     }
@@ -119,7 +132,7 @@ public class PlayerController : MonoBehaviour
             switch (currentState)
             {
                 case PlayerState.JUMP:
-                    spdY = JumpForce;
+                    ApplyJumpForce();
                     break;
                 case PlayerState.ATK:
                     if (renderer.flipX) attackL.EnableOnce();
@@ -293,5 +306,30 @@ public class PlayerController : MonoBehaviour
                 if (stateTimer > 0.4f) EnterState(PlayerState.CROUCH);
                 break;
         }
+    }
+
+    public void ApplyJumpForce()
+    {
+        spdY = JumpForce * jmpMult;
+    }
+    public void IncreaseJumpHeight()
+    {
+        jmpMult += 0.05f;
+    }
+    float dmgMult = 1.0f;
+    float jmpMult = 1.0f;
+    public void IncreaseAttackMult()
+    {
+        dmgMult+=0.2001f;
+        damagerR.DealtDamage = (int)(30 * dmgMult);
+        damagerL.DealtDamage = (int)(30 * dmgMult);
+    }
+
+    public void SelectInventoryItem(string itemType)
+    {
+        //item = true;
+        //bow = true;
+        Debug.Log(itemType);
+        inventoryVisible = false;
     }
 }

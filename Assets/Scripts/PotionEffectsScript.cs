@@ -11,6 +11,7 @@ public class PotionEffectsScript : MonoBehaviour
     float agilityEffectTime = -1;
     float frozenEffectTime = -1;
     float burningEffectTime = -1;
+    float invisibleEffectTime = -1;
 
     float healthLossTiming1 = 0;
     float healthLossTiming2 = 0;
@@ -38,6 +39,7 @@ public class PotionEffectsScript : MonoBehaviour
         agilityEffectTime -= Time.deltaTime;
         frozenEffectTime -= Time.deltaTime;
         burningEffectTime -= Time.deltaTime;
+        invisibleEffectTime -= Time.deltaTime;
 
         if (healthLossTiming1 > 1f)
         {
@@ -61,4 +63,9 @@ public class PotionEffectsScript : MonoBehaviour
     public void ApplyAgility(float time) { if (time > agilityEffectTime) agilityEffectTime = time; }
     public void ApplyFrozen(float time) { if (time > frozenEffectTime) frozenEffectTime = time; }
     public void ApplyBurning(float time) { if (time > burningEffectTime) burningEffectTime = time; }
+    public void ApplyInvisible(float time) { if (time > invisibleEffectTime) invisibleEffectTime = time; }
+
+    public void CancelBurning() => burningEffectTime = -1;
+    public void CancelFrozen() => frozenEffectTime = -1;
+    public void CancelPoison() => poisonEffectTime = -1;
 }

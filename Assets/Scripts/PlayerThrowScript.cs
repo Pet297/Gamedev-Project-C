@@ -18,10 +18,15 @@ public class PlayerThrowScript : MonoBehaviour
         
     }
 
-    public void Throw(float spdx, float spdy)
+    public void Throw(GameObject player, float spdx, float spdy)
     {
         GameObject g = ops.GetPooledObject();
-        g.transform.position = gameObject.transform.position;
+        if (g != null) g.transform.position = player.transform.position;
+        g?.SetActive(true);
         g?.GetComponent<Rigidbody2D>()?.AddForce(new Vector3(spdx,spdy,0));
+
+        BombScript bs = null;
+        g?.TryGetComponent<BombScript>(out bs);
+        bs?.BombSpawned();
     }
 }

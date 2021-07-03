@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IwtWaterScript : MonoBehaviour, IAfectable
+public class IwtWaterScript : AbstractAfectable
 {
     public int CurrentState = 0;
     private Animator animator;
@@ -19,7 +19,7 @@ public class IwtWaterScript : MonoBehaviour, IAfectable
         animator.SetInteger("State", CurrentState);
     }
 
-    public void OnHeat()
+    public override void OnHeat()
     {
         if (CurrentState == 1)
         {
@@ -27,7 +27,7 @@ public class IwtWaterScript : MonoBehaviour, IAfectable
         }
         else if (CurrentState == 2) CurrentState = 0;
     }
-    public void OnFreeze()
+    public override void OnFreeze()
     {
         if (CurrentState == 0) CurrentState = 2;
         else if (CurrentState == 3)
@@ -35,21 +35,22 @@ public class IwtWaterScript : MonoBehaviour, IAfectable
             //SPAWN PLATFORM
         }
     }
-    public void OnPoison()
+    public override void OnPoison()
     {
         if (CurrentState == 0) CurrentState = 1;
         else if (CurrentState == 3) CurrentState = 0;
     }
-    public void OnMagic()
+    public override void OnMagic()
     {
         if (CurrentState == 0) CurrentState = 3;
     }
-    public void OnAntidote()
+    public override void OnAntidote()
     {
         if (CurrentState == 1) CurrentState = 0;
     }
-    public void OnExplode()
+    public override void OnExplode()
     {
+        Debug.Log("explode");
         if (CurrentState == 2) GameObject.Destroy(gameObject);
     }
 }

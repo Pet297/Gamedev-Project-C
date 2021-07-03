@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IwtSandScript : MonoBehaviour, IAfectable
+public class IwtSandScript : AbstractAfectable
 {
     public int CurrentState = 0;
     private Animator animator;
@@ -19,15 +19,15 @@ public class IwtSandScript : MonoBehaviour, IAfectable
         animator.SetInteger("State", CurrentState);
     }
 
-    public void OnHeat()
+    public override void OnHeat()
     {
         if (CurrentState == 0) CurrentState = 1;
     }
-    public void OnFreeze() { }
-    public void OnPoison() { }
-    public void OnMagic() { }
-    public void OnAntidote() { }
-    public void OnExplode()
+    public override void OnFreeze() { }
+    public override void OnPoison() { }
+    public override void OnMagic() { }
+    public override void OnAntidote() { }
+    public override void OnExplode()
     {
         if (CurrentState == 1) GameObject.Destroy(gameObject);
     }

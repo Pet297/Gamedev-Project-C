@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IAfectable
+public abstract class AbstractAfectable : MonoBehaviour
 {
-    void OnHeat();
-    void OnFreeze();
-    void OnPoison();
-    void OnMagic();
-    void OnAntidote();
-    void OnExplode();
+    public abstract void OnHeat();
+    public abstract void OnFreeze();
+    public abstract void OnPoison();
+    public abstract void OnMagic();
+    public abstract void OnAntidote();
+    public abstract void OnExplode();
 }

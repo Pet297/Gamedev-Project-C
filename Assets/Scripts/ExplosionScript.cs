@@ -16,13 +16,25 @@ public class ExplosionScript : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void StartExplosion()
+    {
+        Invoke("EndExplosion", 0.5f);
+    }
+
+    void EndExplosion()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void OnCollisionStay2D(Collision2D collision)
     {
         GameObject collider = collision.collider.gameObject;
-        IAfectable af = collider.GetComponent<IAfectable>();
+        //AbstractAfectable af = collider.GetComponent<AbstractAfectable>();
+        AbstractAfectable af = (AbstractAfectable)GetComponent(typeof(AbstractAfectable));
 
         if (af != null)
         {
+            Debug.Log("exploding");
             af.OnExplode();
         }
     }

@@ -56,10 +56,10 @@ public class PlayerController : MonoBehaviour
         throwers.Add("AF_H", Thrower_AF_H.GetComponent<PlayerThrowScript>());
         throwers.Add("PT_V", Thrower_PT_V.GetComponent<PlayerThrowScript>());
         throwers.Add("AR_R", Thrower_AR_R.GetComponent<PlayerThrowScript>());
-        throwers.Add("AR_H", Thrower_AR_R.GetComponent<PlayerThrowScript>());
-        throwers.Add("AR_F", Thrower_AR_R.GetComponent<PlayerThrowScript>());
-        throwers.Add("AR_P", Thrower_AR_R.GetComponent<PlayerThrowScript>());
-        throwers.Add("AR_M", Thrower_AR_R.GetComponent<PlayerThrowScript>());
+        throwers.Add("AR_H", Thrower_AR_H.GetComponent<PlayerThrowScript>());
+        throwers.Add("AR_F", Thrower_AR_F.GetComponent<PlayerThrowScript>());
+        throwers.Add("AR_P", Thrower_AR_P.GetComponent<PlayerThrowScript>());
+        throwers.Add("AR_M", Thrower_AR_M.GetComponent<PlayerThrowScript>());
     }
 
     bool jump = false;
@@ -123,6 +123,8 @@ public class PlayerController : MonoBehaviour
                     heldItem = "";
                     heldItemType = HeldItemType.NONE;
                 }
+
+                attack = false;
             }
             else if (heldItemType == HeldItemType.BOW)
             {
@@ -134,6 +136,8 @@ public class PlayerController : MonoBehaviour
                     case "AR_P": ShootProjectile(heldItem); break;
                     case "AR_M": ShootProjectile(heldItem); break;
                 }
+
+                attack = false;
             }
             else if (heldItemType == HeldItemType.THROW_POTION)
             {
@@ -155,6 +159,8 @@ public class PlayerController : MonoBehaviour
                     case "AF_F": ShootProjectile(heldItem); break;
                     case "AF_A": ShootProjectile(heldItem); break;
                 }
+
+                attack = false;
             }
         }
 
@@ -466,6 +472,6 @@ public class PlayerController : MonoBehaviour
 
     void ShootProjectile(string itemType)
     {
-        throwers[itemType].Throw(5, 0);
+        throwers[itemType].Throw(gameObject,500, 0);
     }
 }

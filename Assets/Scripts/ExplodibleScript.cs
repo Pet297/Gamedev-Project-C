@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplodibleScript : MonoBehaviour, IAfectable
+public class ExplodibleScript : AbstractAfectable
 {
     // Start is called before the first frame update
     void Start()
@@ -16,12 +16,12 @@ public class ExplodibleScript : MonoBehaviour, IAfectable
         
     }
 
-    public void OnHeat() { }
-    public void OnFreeze() { }
-    public void OnPoison() { }
-    public void OnMagic() { }
-    public void OnAntidote() { }
-    public void OnExplode()
+    public override void OnHeat() { }
+    public override void OnFreeze() { }
+    public override void OnPoison() { }
+    public override void OnMagic() { }
+    public override void OnAntidote() { }
+    public override void OnExplode()
     {
         GameObject.Destroy(gameObject);
     }

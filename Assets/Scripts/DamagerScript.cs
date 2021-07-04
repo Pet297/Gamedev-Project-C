@@ -6,6 +6,7 @@ public class DamagerScript : MonoBehaviour
 {
     public LayerMask AffectedLayer;
     public int DealtDamage = 20;
+    public bool SelfDestroy = true;
 
     Collider2D collider;
 
@@ -32,7 +33,7 @@ public class DamagerScript : MonoBehaviour
         {
             HealthPointsScript hps = (collision.collider.GetComponent(typeof(HealthPointsScript)) as HealthPointsScript);
             if (hps != null) hps.GetHit(DealtDamage);
-            this.gameObject.SetActive(false);
+            if (SelfDestroy) this.gameObject.SetActive(false);
         }
     }
 }

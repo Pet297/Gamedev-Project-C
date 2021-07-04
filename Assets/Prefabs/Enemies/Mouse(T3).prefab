@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2543364472646937110}
   - component: {fileID: 6053124869649097529}
   - component: {fileID: -9061509123949309664}
+  - component: {fileID: 6319783846122850139}
+  - component: {fileID: -6210813100378422638}
   m_Layer: 6
   m_Name: Mouse(T3)
   m_TagString: Untagged
@@ -198,3 +200,28 @@ MonoBehaviour:
   MaxHealth: 125
   InvincibilitySeconds: 0.4
   HealthBar: {fileID: 0}
+  PointReward: 600
+--- !u!114 &6319783846122850139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8488303300170413341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d8c53577719154d9ec6fc0c603d135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6210813100378422638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8488303300170413341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66a9eb6292cf63489d5c0d3f5baeec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

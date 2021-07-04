@@ -8,6 +8,7 @@ public class BeaverControlerScript : MonoBehaviour
     public float ThrowDelay = 1.0f;
 
     private GameObject Player;
+    private PlayerController pc;
 
     private float ThrowTime = 0;
     private bool WasThrown = false;
@@ -22,26 +23,27 @@ public class BeaverControlerScript : MonoBehaviour
         pool = gameObject.GetComponent<ObjectPoolScript>();
         renderer = gameObject.GetComponent<SpriteRenderer>();
         Player = GameObject.Find("Player");
+        pc = Player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Player != null)
+        if (Player != null && pc.Visible && pc.InSameRoom(gameObject.transform.position))
         {
             if (Player.transform.position.x > transform.position.x) renderer.flipX = true;
             else renderer.flipX = false;
-        }
 
-        ThrowTime += Time.deltaTime;
-        if (ThrowTime > ThrowFrequency)
-        {
-            animator.SetBool("ThrowLog", true);
-        }
-        if (ThrowTime > (ThrowFrequency + ThrowDelay) && !WasThrown)
-        {
-            WasThrown = true;
-            Throw();
+            ThrowTime += Time.deltaTime;
+            if (ThrowTime > ThrowFrequency)
+            {
+                animator.SetBool("ThrowLog", true);
+            }
+            if (ThrowTime > (ThrowFrequency + ThrowDelay) && !WasThrown)
+            {
+                WasThrown = true;
+                Throw();
+            }
         }
     }
 

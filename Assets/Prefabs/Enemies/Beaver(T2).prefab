@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 3261589546772925054}
   - component: {fileID: 4355223738329494123}
   - component: {fileID: 7021427889493299850}
+  - component: {fileID: 6648366998951411329}
+  - component: {fileID: -9139331139152538985}
   m_Layer: 6
   m_Name: Beaver(T2)
   m_TagString: Untagged
@@ -198,3 +200,28 @@ MonoBehaviour:
   MaxHealth: 450
   InvincibilitySeconds: 0.4
   HealthBar: {fileID: 0}
+  PointReward: 1000
+--- !u!114 &6648366998951411329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7675289809968511610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d8c53577719154d9ec6fc0c603d135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-9139331139152538985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7675289809968511610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66a9eb6292cf63489d5c0d3f5baeec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

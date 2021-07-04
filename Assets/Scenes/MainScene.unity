@@ -611,6 +611,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4742904902355723263, guid: 46a290a5cd8db2e428f446220c2406d0, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742904902355723263, guid: 46a290a5cd8db2e428f446220c2406d0, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742904902355723263, guid: 46a290a5cd8db2e428f446220c2406d0, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46a290a5cd8db2e428f446220c2406d0, type: 3}
 --- !u!1 &63588546
@@ -13101,7 +13113,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &691855741
 RectTransform:
@@ -18849,6 +18861,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8263792884254068861, guid: 7e0b526be463dd64f9fc20884bb0a759, type: 3}
+      propertyPath: Camera
+      value: 
+      objectReference: {fileID: 519420028}
     - target: {fileID: 8263792884254068861, guid: 7e0b526be463dd64f9fc20884bb0a759, type: 3}
       propertyPath: InventoryObject
       value: 

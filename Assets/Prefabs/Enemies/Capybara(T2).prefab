@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 8487173362259649875}
   - component: {fileID: 8487173362259649872}
   - component: {fileID: 663549204032399274}
+  - component: {fileID: -906688251644572964}
+  - component: {fileID: 5861956784248389809}
   m_Layer: 6
   m_Name: Capybara(T2)
   m_TagString: Untagged
@@ -167,3 +169,27 @@ MonoBehaviour:
   MaxHealth: 15000
   InvincibilitySeconds: 0.4
   HealthBar: {fileID: 0}
+--- !u!114 &-906688251644572964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487173362259649708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d8c53577719154d9ec6fc0c603d135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5861956784248389809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487173362259649708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66a9eb6292cf63489d5c0d3f5baeec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 661408802806812066}
   - component: {fileID: 661408802806812065}
   - component: {fileID: -4238797566317142816}
+  - component: {fileID: -1605620117640649516}
+  - component: {fileID: -8337704318309089624}
   m_Layer: 6
   m_Name: Squirel(T3)
   m_TagString: Untagged
@@ -200,6 +202,31 @@ MonoBehaviour:
   MaxHealth: 500
   InvincibilitySeconds: 0.4
   HealthBar: {fileID: 0}
+  PointReward: 900
+--- !u!114 &-1605620117640649516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661408802806812069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d8c53577719154d9ec6fc0c603d135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8337704318309089624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661408802806812069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66a9eb6292cf63489d5c0d3f5baeec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1264283835285890039
 GameObject:
   m_ObjectHideFlags: 0

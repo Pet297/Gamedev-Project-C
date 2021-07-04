@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5152840306961000833}
   - component: {fileID: -8362475064126905132}
   - component: {fileID: 2280718580993780250}
+  - component: {fileID: -4511223667172499437}
   m_Layer: 9
   m_Name: PlayerProj_AF_P
   m_TagString: Untagged
@@ -156,4 +157,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AffectedBy:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 320
+--- !u!114 &-4511223667172499437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085464011599074040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff7a4b6fc97f53f41b680e9289cb40c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -11,6 +11,10 @@ public class HealthPointsScript : MonoBehaviour
     public GameObject HealthBar = null;
     private HealthBarScript hbs = null;
 
+    //public GameObject Player = null;
+    public int PointReward = 0;
+    private GameScoreScript gss = null;
+
     float timeSinceHit = 0f;
 
     // Start is called before the first frame update
@@ -18,6 +22,8 @@ public class HealthPointsScript : MonoBehaviour
     {
         health = MaxHealth;
         if (HealthBar != null) hbs = HealthBar.GetComponent<HealthBarScript>();
+        GameObject Player = GameObject.Find("Player");
+        if (Player != null) gss = Player.GetComponent<GameScoreScript>();
     }
 
     // Update is called once per frame
@@ -39,6 +45,7 @@ public class HealthPointsScript : MonoBehaviour
         {
             health = 0;
             GameObject.Destroy(gameObject);
+            if (gss != null) gss.Increase(PointReward);
         }
         UpdateHealthBar();
     }
@@ -54,6 +61,7 @@ public class HealthPointsScript : MonoBehaviour
     public void IncreaseRelative(float percentage)
     {
         health += (int)(percentage * MaxHealth);
+        if (health > MaxHealth) health = MaxHealth;
         UpdateHealthBar();
     }
     public void IncreaseMax(int value)

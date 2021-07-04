@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 7900276634467674320}
   - component: {fileID: -103877707701521944}
   - component: {fileID: 3083190617482699044}
+  - component: {fileID: -1029327442191402264}
+  - component: {fileID: -2757903383985289878}
   m_Layer: 6
   m_Name: Rat(T3)
   m_TagString: Untagged
@@ -198,3 +200,28 @@ MonoBehaviour:
   MaxHealth: 375
   InvincibilitySeconds: 0.4
   HealthBar: {fileID: 0}
+  PointReward: 900
+--- !u!114 &-1029327442191402264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6990913476764903639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d8c53577719154d9ec6fc0c603d135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2757903383985289878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6990913476764903639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66a9eb6292cf63489d5c0d3f5baeec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

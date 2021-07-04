@@ -20,7 +20,7 @@ public class BombScript : MonoBehaviour
 
     public void BombSpawned()
     {
-        Invoke("Explode", 2);
+        Invoke("Explode", 1.5f);
     }
 
     void Explode()

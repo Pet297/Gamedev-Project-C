@@ -9,6 +9,7 @@ public class SquirelControlerScript : MonoBehaviour
     public GameObject ShootOrigin;
 
     private GameObject Player;
+    private PlayerController pc;
 
     private float AttackTime = 0;
     private bool Attacked = false;
@@ -23,26 +24,27 @@ public class SquirelControlerScript : MonoBehaviour
         pool = gameObject.GetComponent<ObjectPoolScript>();
         renderer = gameObject.GetComponent<SpriteRenderer>();
         Player = GameObject.Find("Player");
+        pc = Player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Player != null)
+        if (Player != null && pc.Visible && pc.InSameRoom(gameObject.transform.position))
         {
             if (Player.transform.position.x > transform.position.x) renderer.flipX = true;
             else renderer.flipX = false;
-        }
 
-        AttackTime += Time.deltaTime;
-        if (AttackTime > AttackFrequency)
-        {
-            animator.SetBool("Attack", true);
-        }
-        if (AttackTime > (AttackFrequency + AttackDelay) && !Attacked)
-        {
-            Attacked = true;
-            Throw();
+            AttackTime += Time.deltaTime;
+            if (AttackTime > AttackFrequency)
+            {
+                animator.SetBool("Attack", true);
+            }
+            if (AttackTime > (AttackFrequency + AttackDelay) && !Attacked)
+            {
+                Attacked = true;
+                Throw();
+            }
         }
     }
 

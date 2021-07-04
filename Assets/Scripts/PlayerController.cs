@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public float MaxSpeed = 0.05f;
     public Vector2 GroundCheck;
     public LayerMask Ground;
+    public int RoomSizeX = 40;
+    public int RoomSizeY = 20;
 
     //custom gravity impl
     float spdY = -0.2f;
@@ -16,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public GameObject AttackL;
     public GameObject AttackR;
     public GameObject InventoryObject;
+    public GameObject Camera;
 
     private Rigidbody2D rigidbody2D;
     private SpriteRenderer renderer;
@@ -25,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInventoryScript inventory;
     private HealthPointsScript hps;
     private PotionEffectsScript pes;
+    private Camera cam;
 
     private TemporalEnablerScript attackR;
     private TemporalEnablerScript attackL;
@@ -46,6 +51,7 @@ public class PlayerController : MonoBehaviour
         inventory = GetComponent<PlayerInventoryScript>();
         hps = GetComponent<HealthPointsScript>();
         pes = GetComponent<PotionEffectsScript>();
+        cam = Camera.GetComponent<Camera>();
 
         throwers.Clear();
         throwers.Add("BOMB", Thrower_Bomb.GetComponent<PlayerThrowScript>());
@@ -472,6 +478,24 @@ public class PlayerController : MonoBehaviour
 
     void ShootProjectile(string itemType)
     {
-        throwers[itemType].Throw(gameObject,500, 0);
+        Vector3 playerScreen = cam.WorldToScreenPoint(gameObject.transform.position);
+        Vector3 mouse = Input.mousePosition;
+        Vector3 diff = new Vector3(mouse.x - playerScreen.x, mouse.y - playerScreen.y, 0);
+        diff = diff.normalized;
+
+        float power = 500;
+
+        throwers[itemType].Throw(gameObject,500 * diff.x, 500 * diff.y);
     }
+
+    public bool InSameRoom(Vector3 position)
+    {
+        int pRoomX = (int)Math.Floor((gameObject.transform.position.x + RoomSizeX / 2) / RoomSizeX);
+        int pRoomY = (int)Math.Floor((gameObject.transform.position.y + RoomSizeY / 2) / RoomSizeY);
+        int eRoomX = (int)Math.Floor((position.x + RoomSizeX / 2) / RoomSizeX);
+        int eRoomY = (int)Math.Floor((position.y + RoomSizeY / 2) / RoomSizeY);
+
+        return pRoomX == eRoomX && pRoomY == eRoomY;
+    }
+    public bool Visible => pes.Visible;
 }

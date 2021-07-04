@@ -142,7 +142,8 @@ MonoBehaviour:
   AffectedLayer:
     serializedVersion: 2
     m_Bits: 64
-  DealtDamage: 30
+  DealtDamage: 20
+  SelfDestroy: 1
 --- !u!61 &2611204785415900482
 BoxCollider2D:
   m_ObjectHideFlags: 0

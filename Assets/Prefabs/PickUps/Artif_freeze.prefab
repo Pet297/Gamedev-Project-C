@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2368920687839522197}
   - component: {fileID: 2368920687839522196}
   - component: {fileID: 2368920687839522199}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Artif_freeze
   m_TagString: Untagged
   m_Icon: {fileID: 0}

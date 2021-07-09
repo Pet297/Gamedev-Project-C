@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6678601241707697244}
   - component: {fileID: 8889888138921810237}
   - component: {fileID: 5885196316061571599}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cracked_Wall(V3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

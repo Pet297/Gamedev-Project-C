@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7857695299237198904}
   - component: {fileID: 7857695299237198887}
   - component: {fileID: 7857695299237198886}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Artif_antid
   m_TagString: Untagged
   m_Icon: {fileID: 0}

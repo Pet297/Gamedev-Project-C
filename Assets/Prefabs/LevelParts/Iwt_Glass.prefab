@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4067643223158844605}
   - component: {fileID: 938396548906941601}
   - component: {fileID: 8204670455249258840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Iwt_Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -793,9 +793,16 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 256
+  RoomSizeX: 40
+  RoomSizeY: 20
+  LadderCheck: {x: 0, y: 0}
+  LadderLayer:
+    serializedVersion: 2
+    m_Bits: 8192
   AttackL: {fileID: 8263792884559532126}
   AttackR: {fileID: 8263792884571322162}
   InventoryObject: {fileID: 0}
+  Camera: {fileID: 0}
   Thrower_Bomb: {fileID: 1665573136593511511}
   Thrower_AF_P: {fileID: 5865303643788452511}
   Thrower_AF_M: {fileID: 2700606011169399177}
@@ -869,6 +876,7 @@ MonoBehaviour:
   MaxHealth: 100
   InvincibilitySeconds: 1
   HealthBar: {fileID: 0}
+  PointReward: 0
 --- !u!114 &8263792884254068848
 MonoBehaviour:
   m_ObjectHideFlags: 0

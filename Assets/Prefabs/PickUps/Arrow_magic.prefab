@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2819172471784037199}
   - component: {fileID: 2819172471784037192}
   - component: {fileID: 2819172471784037193}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Arrow_magic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

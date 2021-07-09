@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     public int RoomSizeX = 40;
     public int RoomSizeY = 20;
 
+
+    public Vector2 LadderCheck;
+    public LayerMask LadderLayer;
+
     //custom gravity impl
     float spdY = -0.2f;
 
@@ -72,6 +76,7 @@ public class PlayerController : MonoBehaviour
     bool attack = false;
     bool item = false;
     bool bow = false;
+    bool climb = false;
     float stateTimer = 0f;
     void Update()
     {
@@ -88,13 +93,18 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         bool touchesGroundNow = CheckGroundCollision();
+        bool canClimb = CheckLadderCollision();
 
         float horizontalMove = Input.GetAxisRaw("Horizontal") * MaxSpeed;
         float verticalAxis = Input.GetAxisRaw("Vertical");
 
         bool landed = !touchesGround && touchesGroundNow;
         bool fell = touchesGround && !touchesGroundNow;
-        bool crouching = verticalAxis < -0.5f;
+        bool crouching = !canClimb && verticalAxis < -0.5f;
+        bool climbing = canClimb && (verticalAxis < -0.5f || verticalAxis > 0.5f);
+
+        if (climbing) climb = true;
+        if (!canClimb) climb = false;
 
         if (attack && heldItemType != HeldItemType.NONE)
         {
@@ -171,12 +181,19 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        UpdateState(jump, landed, fell, crouching, attack);
+        UpdateState(jump, landed, fell, crouching, attack, climb);
 
         rigidbody2D.MovePosition(transform.position + new Vector3(horizontalMove, spdY, 0));
 
-        spdY -= Gravity;
-        if (spdY < -0.2f) spdY = -0.2f;
+        if (!climb)
+        {
+            spdY -= Gravity;
+            if (spdY < -0.2f) spdY = -0.2f;
+        }
+        else
+        {
+            spdY = verticalAxis / 5f;
+        }
 
         touchesGround = touchesGroundNow;
         jump = false;
@@ -193,9 +210,26 @@ public class PlayerController : MonoBehaviour
         {
             if (colliders[i].gameObject != gameObject)
             {
-                return true;
+                if ((Ground.value & (1 << colliders[i].gameObject.layer)) > 0) return true;
             }
         }
+        return false;
+    }
+    bool CheckLadderCollision()
+    {
+        Vector2 checkPos = new Vector2
+            (gameObject.transform.position.x + LadderCheck.x,
+            gameObject.transform.position.y + LadderCheck.y);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(checkPos, new Vector2(0.4f, 1.0f), LadderLayer);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+            {
+                Debug.Log("can climb");
+                if ((LadderLayer.value & (1 << colliders[i].gameObject.layer)) > 0) return true;
+            }
+        }
+        Debug.Log("cant climb");
         return false;
     }
 
@@ -225,6 +259,9 @@ public class PlayerController : MonoBehaviour
             // LEAVE OLD
             switch (currentState)
             {
+                case PlayerState.CLIMB:
+                    climb = false;
+                    break;
             }
 
             currentState = newState;
@@ -376,7 +413,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    void UpdateState(bool jump, bool landed, bool fell, bool crouching, bool attack)
+    void UpdateState(bool jump, bool landed, bool fell, bool crouching, bool attack, bool climb)
     {
         switch (currentState)
         {
@@ -385,13 +422,16 @@ public class PlayerController : MonoBehaviour
                 else if (crouching) EnterState(PlayerState.CROUCH);
                 else if (fell) EnterState(PlayerState.FALL);
                 else if (attack) EnterState(PlayerState.ATK);
+                else if (climb) EnterState(PlayerState.CLIMB);
                 break;
             case PlayerState.JUMP:
                 if (landed) EnterState(PlayerState.STAND);
+                else if (climb) EnterState(PlayerState.CLIMB);
                 break;
             case PlayerState.FALL:
                 if (landed) EnterState(PlayerState.STAND);
                 else if (attack) EnterState(PlayerState.JUMP_ATK);
+                else if (climb) EnterState(PlayerState.CLIMB);
                 break;
             case PlayerState.CROUCH:
                 if (!crouching) EnterState(PlayerState.STAND);
@@ -405,6 +445,10 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.CROUCH_ATK:
                 if (stateTimer > 0.4f) EnterState(PlayerState.CROUCH);
+                break;
+            case PlayerState.CLIMB:
+                if (jump) EnterState(PlayerState.JUMP);
+                else if (!climb) EnterState(PlayerState.FALL);
                 break;
         }
     }

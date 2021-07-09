@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6399960227127372142}
   - component: {fileID: 6399960227127372141}
   - component: {fileID: 6399960227127372140}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Artif_heat
   m_TagString: Untagged
   m_Icon: {fileID: 0}

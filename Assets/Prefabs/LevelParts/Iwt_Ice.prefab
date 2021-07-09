@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7471571253646709348}
   - component: {fileID: 8985691280692803072}
   - component: {fileID: 27908188618632683}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Iwt_Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}

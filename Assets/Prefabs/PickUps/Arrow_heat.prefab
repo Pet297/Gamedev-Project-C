@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8487670378658499491}
   - component: {fileID: 8487670378658499490}
   - component: {fileID: 8487670378658499501}
-  m_Layer: 0
-  m_Name: Arrow_flame
+  m_Layer: 11
+  m_Name: Arrow_heat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

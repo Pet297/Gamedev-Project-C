@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8603682562448476548}
   - component: {fileID: 8603682562448476547}
   - component: {fileID: 8603682562448476546}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Potion_invis
   m_TagString: Untagged
   m_Icon: {fileID: 0}

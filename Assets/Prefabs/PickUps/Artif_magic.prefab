@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1042326489037525141}
   - component: {fileID: 1042326489037525140}
   - component: {fileID: 1042326489037525139}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Artif_magic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3284366813474948237}
   - component: {fileID: -6098856362460137087}
   - component: {fileID: 414877457740388843}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Iwt_Acid
   m_TagString: Untagged
   m_Icon: {fileID: 0}

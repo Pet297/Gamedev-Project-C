@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3770069885315740659}
   - component: {fileID: 3770069885315740660}
   - component: {fileID: 3770069885315740661}
-  m_Layer: 0
-  m_Name: Arrow_ice
+  m_Layer: 11
+  m_Name: Arrow_freeze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

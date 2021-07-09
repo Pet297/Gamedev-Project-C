@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4451453920144197414}
   - component: {fileID: 4451453920144197409}
   - component: {fileID: 4451453920144197408}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Boost_damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -225,11 +225,9 @@ public class PlayerController : MonoBehaviour
         {
             if (colliders[i].gameObject != gameObject)
             {
-                Debug.Log("can climb");
                 if ((LadderLayer.value & (1 << colliders[i].gameObject.layer)) > 0) return true;
             }
         }
-        Debug.Log("cant climb");
         return false;
     }
 
@@ -540,6 +538,13 @@ public class PlayerController : MonoBehaviour
         int eRoomY = (int)Math.Floor((position.y + RoomSizeY / 2) / RoomSizeY);
 
         return pRoomX == eRoomX && pRoomY == eRoomY;
+    }
+    public bool MaxOneRoomAway(int roomX, int roomY)
+    {
+        int pRoomX = (int)Math.Floor((gameObject.transform.position.x + RoomSizeX / 2) / RoomSizeX);
+        int pRoomY = (int)Math.Floor((gameObject.transform.position.y + RoomSizeY / 2) / RoomSizeY);
+
+        return Math.Abs(pRoomX - roomX) <= 1 && Math.Abs(pRoomY - roomY) <= 1;
     }
     public bool Visible => pes.Visible;
 }

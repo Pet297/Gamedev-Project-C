@@ -25,6 +25,7 @@ public class GUIElementScript : MonoBehaviour
 
     public void UpdateCount(int newCount)
     {
-        displayText.text = newCount.ToString();
+        if (newCount == 0) displayText.text = "---";
+        else displayText.text = newCount.ToString();
     }
 }

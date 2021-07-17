@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3209899387088374190}
   - component: {fileID: 2611204785415900482}
   - component: {fileID: 4592960376771244373}
+  - component: {fileID: 263336172522833703}
   m_Layer: 9
   m_Name: PlayerProj_AR_R
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142305357776248587}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.37, y: -1.77, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -126,7 +127,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &3209899387088374190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +152,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142305357776248587}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -185,3 +186,15 @@ MonoBehaviour:
   AffectedBy:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &263336172522833703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142305357776248587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61298fde602c8348972c540b6048e4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

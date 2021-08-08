@@ -27,7 +27,7 @@ public class BeaverControlerScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Player != null && pc.Visible && pc.InSameRoom(gameObject.transform.position))
         {

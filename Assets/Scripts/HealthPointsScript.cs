@@ -10,6 +10,7 @@ public class HealthPointsScript : MonoBehaviour
     public float InvincibilitySeconds = 1.0f;
     public GameObject HealthBar = null;
     private HealthBarScript hbs = null;
+    private CatSaveScript css = null;
 
     //public GameObject Player = null;
     public int PointReward = 0;
@@ -24,6 +25,7 @@ public class HealthPointsScript : MonoBehaviour
         if (HealthBar != null) hbs = HealthBar.GetComponent<HealthBarScript>();
         GameObject Player = GameObject.Find("Player");
         if (Player != null) gss = Player.GetComponent<GameScoreScript>();
+        css = GetComponent<CatSaveScript>();
     }
 
     // Update is called once per frame
@@ -46,6 +48,7 @@ public class HealthPointsScript : MonoBehaviour
             health = 0;
             GameObject.Destroy(gameObject);
             if (gss != null) gss.Increase(PointReward);
+            if (css != null) css.SaveCat();
         }
         UpdateHealthBar();
     }

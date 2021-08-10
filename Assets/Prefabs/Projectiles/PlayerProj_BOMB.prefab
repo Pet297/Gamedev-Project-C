@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5345305692813074976}
   - component: {fileID: 6299112217247369470}
   - component: {fileID: 1411945489411351166}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: PlayerProj_BOMB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2302204457580889018}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

@@ -539,6 +539,13 @@ public class PlayerController : MonoBehaviour
 
         return pRoomX == eRoomX && pRoomY == eRoomY;
     }
+    public bool InSameRoom1(Vector3 position)
+    {
+        int eRoomX = (int)Math.Floor((position.x + RoomSizeX / 2) / RoomSizeX);
+        int eRoomY = (int)Math.Floor((position.y + RoomSizeY / 2) / RoomSizeY);
+
+        return MaxOneRoomAway(eRoomX, eRoomY);
+    }
     public bool MaxOneRoomAway(int roomX, int roomY)
     {
         int pRoomX = (int)Math.Floor((gameObject.transform.position.x + RoomSizeX / 2) / RoomSizeX);

@@ -134,7 +134,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2913388700184418332}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AffectedBy:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 16704
 --- !u!114 &-287017723586229133
 MonoBehaviour:
   m_ObjectHideFlags: 0

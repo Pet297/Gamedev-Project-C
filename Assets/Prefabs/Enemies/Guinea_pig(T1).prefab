@@ -11,8 +11,13 @@ GameObject:
   - component: {fileID: 2369379254324687988}
   - component: {fileID: 2369379254324687989}
   - component: {fileID: 2369379254324687994}
-  - component: {fileID: 5366085360838723610}
-  m_Layer: 0
+  - component: {fileID: -8667368216939540149}
+  - component: {fileID: -3514068209627245351}
+  - component: {fileID: -710158103612412230}
+  - component: {fileID: 6508953695976009396}
+  - component: {fileID: 4472190226997139811}
+  - component: {fileID: 7149379876535368997}
+  m_Layer: 6
   m_Name: Guinea_pig(T1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +108,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5366085360838723610
+--- !u!114 &-8667368216939540149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,6 +117,89 @@ MonoBehaviour:
   m_GameObject: {fileID: 2369379254324687995}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a4c5f7d05142a446885b905b2e8c349, type: 3}
+  m_Script: {fileID: 11500000, guid: 970ed9b03bd081646992f03365d4e245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackFrequency: 4
+  AttackDelay: 1
+--- !u!61 &-3514068209627245351
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369379254324687995}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2}
+  m_EdgeRadius: 0
+--- !u!114 &-710158103612412230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369379254324687995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa3c30f0cba993478195b81c916fbd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolInstance: GP1
+  objectToPool: {fileID: 6032593448430480150, guid: 8625fad7c517bc34ab580d779924e7c5, type: 3}
+  amountToPool: 10
+--- !u!114 &6508953695976009396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369379254324687995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8ae99f65de53d4c96ad5ccd5d52772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 300
+  InvincibilitySeconds: 0.3
+  HealthBar: {fileID: 0}
+  PointReward: 300
+--- !u!114 &4472190226997139811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369379254324687995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d8c53577719154d9ec6fc0c603d135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7149379876535368997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369379254324687995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66a9eb6292cf63489d5c0d3f5baeec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

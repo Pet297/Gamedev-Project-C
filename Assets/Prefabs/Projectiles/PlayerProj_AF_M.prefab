@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AffectedBy:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 16704
 --- !u!114 &-1333932290872208059
 MonoBehaviour:
   m_ObjectHideFlags: 0

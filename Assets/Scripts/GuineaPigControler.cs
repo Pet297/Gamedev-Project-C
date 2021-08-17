@@ -22,14 +22,14 @@ public class GuineaPigControler : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
         pool = gameObject.GetComponent<ObjectPoolScript>();
         renderer = gameObject.GetComponent<SpriteRenderer>();
-        Player = GameObject.Find("Player");
-        pc = Player.GetComponent<PlayerController>();
+        Player = GameObject.FindWithTag("Player");
+        pc = Player?.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Player != null && pc.Visible && pc.InSameRoom(gameObject.transform.position))
+        if (Player != null && pc != null && pc.Visible && pc.InSameRoom(gameObject.transform.position))
         {
             if (Player.transform.position.x > transform.position.x) renderer.flipX = true;
             else renderer.flipX = false;

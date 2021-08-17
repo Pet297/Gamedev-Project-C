@@ -19,7 +19,7 @@ public class DamagerScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(gameObject.transform.position.x + collider.offset.x, gameObject.transform.position.y + collider.offset.y), new Vector2(collider.bounds.size.x / 2, collider.bounds.size.y / 2), AffectedLayer);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(gameObject.transform.position.x + collider.offset.x, gameObject.transform.position.y + collider.offset.y), new Vector2(collider.bounds.size.x*2, collider.bounds.size.y*2), 0, AffectedLayer);
         for (int i = 0; i < colliders.Length; i++)
         {
             if ((AffectedLayer.value & (1 << colliders[i].gameObject.layer)) > 0)

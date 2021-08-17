@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     public int RoomSizeX = 40;
     public int RoomSizeY = 20;
 
+    Vector2 GroundCheck1;
+    Vector2 GroundCheck2;
+
 
     public Vector2 LadderCheck;
     public LayerMask LadderLayer;
@@ -22,21 +25,30 @@ public class PlayerController : MonoBehaviour
 
     public GameObject AttackL;
     public GameObject AttackR;
+    public GameObject AttackL2;
+    public GameObject AttackR2;
     public GameObject InventoryObject;
     public GameObject Camera;
+    public GameObject SelectedItemDisplay;
 
     private Rigidbody2D rigidbody2D;
     private SpriteRenderer renderer;
     private Animator animator;
     private DamagerScript damagerR;
     private DamagerScript damagerL;
+    private DamagerScript damagerR2;
+    private DamagerScript damagerL2;
     private PlayerInventoryScript inventory;
     private HealthPointsScript hps;
     private PotionEffectsScript pes;
     private Camera cam;
 
+    private HeldItemImage hii;
+
     private TemporalEnablerScript attackR;
     private TemporalEnablerScript attackL;
+    private TemporalEnablerScript attackR2;
+    private TemporalEnablerScript attackL2;
     bool touchesGround = false;
     bool inventoryVisible = false;
     PlayerState currentState = PlayerState.STAND;
@@ -46,8 +58,13 @@ public class PlayerController : MonoBehaviour
     {
         damagerR = AttackR.GetComponent<DamagerScript>();
         damagerL = AttackL.GetComponent<DamagerScript>();
+        damagerR2 = AttackR2.GetComponent<DamagerScript>();
+        damagerL2 = AttackL2.GetComponent<DamagerScript>();
         attackR = AttackR.GetComponent<TemporalEnablerScript>();
         attackL = AttackL.GetComponent<TemporalEnablerScript>();
+        attackR2 = AttackR2.GetComponent<TemporalEnablerScript>();
+        attackL2 = AttackL2.GetComponent<TemporalEnablerScript>();
+        hii = SelectedItemDisplay.GetComponent<HeldItemImage>();
 
         renderer = GetComponent<SpriteRenderer>();
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -70,6 +87,9 @@ public class PlayerController : MonoBehaviour
         throwers.Add("AR_F", Thrower_AR_F.GetComponent<PlayerThrowScript>());
         throwers.Add("AR_P", Thrower_AR_P.GetComponent<PlayerThrowScript>());
         throwers.Add("AR_M", Thrower_AR_M.GetComponent<PlayerThrowScript>());
+
+        GroundCheck1 = GroundCheck + new Vector2(0.15f, 0f);
+        GroundCheck2 = GroundCheck + new Vector2(-0.15f, 0f);
     }
 
     bool jump = false;
@@ -87,15 +107,26 @@ public class PlayerController : MonoBehaviour
         jump = jump || Input.GetButtonDown("Jump");
         attack = attack || Input.GetButtonDown("Fire1");
 
+        bool nattack = !Input.GetButton("Fire1");
+
+        if (currentState == PlayerState.BOW_AIM)
+        {
+            if (nattack) attack = false;
+            else attack = true;
+        }
+
         stateTimer += Time.deltaTime;
     }
 
     void FixedUpdate()
     {
-        bool touchesGroundNow = CheckGroundCollision();
+        bool touchesGroundNow = CheckGroundCollision(GroundCheck) || CheckGroundCollision(GroundCheck1) || CheckGroundCollision(GroundCheck2);
         bool canClimb = CheckLadderCollision();
 
         float horizontalMove = Input.GetAxisRaw("Horizontal") * MaxSpeed;
+
+        if (currentState != PlayerState.BOW_AIM && Mathf.Abs(horizontalMove) > 0.1f) renderer.flipX = horizontalMove < 0;
+
         float verticalAxis = Input.GetAxisRaw("Vertical");
 
         bool landed = !touchesGround && touchesGroundNow;
@@ -105,6 +136,25 @@ public class PlayerController : MonoBehaviour
 
         if (climbing) climb = true;
         if (!canClimb) climb = false;
+
+        bool bowaim = false;
+
+
+        if (!attack && currentState == PlayerState.BOW_AIM)
+        {
+
+            switch (heldItem)
+            {
+                case "AR_R": ShootProjectile(heldItem); break;
+                case "AR_H": ShootProjectile(heldItem); break;
+                case "AR_F": ShootProjectile(heldItem); break;
+                case "AR_P": ShootProjectile(heldItem); break;
+                case "AR_M": ShootProjectile(heldItem); break;
+            }
+
+            bowaim = false;
+        }
+
 
         if (attack && heldItemType != HeldItemType.NONE)
         {
@@ -121,8 +171,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 inventory.RemoveItem(heldItem);
-                heldItem = "";
-                heldItemType = HeldItemType.NONE;
+                SelectInventoryItem("");
             }
             else if (heldItemType == HeldItemType.THROW)
             {
@@ -136,24 +185,15 @@ public class PlayerController : MonoBehaviour
                 if (heldItem == "BOMB")
                 {
                     inventory.RemoveItem(heldItem);
-                    heldItem = "";
-                    heldItemType = HeldItemType.NONE;
+
+                    SelectInventoryItem("");
                 }
 
                 attack = false;
             }
             else if (heldItemType == HeldItemType.BOW)
             {
-                switch (heldItem)
-                {
-                    case "AR_R": ShootProjectile(heldItem); break;
-                    case "AR_H": ShootProjectile(heldItem); break;
-                    case "AR_F": ShootProjectile(heldItem); break;
-                    case "AR_P": ShootProjectile(heldItem); break;
-                    case "AR_M": ShootProjectile(heldItem); break;
-                }
-
-                attack = false;
+                bowaim = true;
             }
             else if (heldItemType == HeldItemType.THROW_POTION)
             {
@@ -181,9 +221,10 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        UpdateState(jump, landed, fell, crouching, attack, climb);
+        PlayerState previousState = currentState;
+        UpdateState(jump, landed, fell, crouching, attack, climb, bowaim);
 
-        rigidbody2D.MovePosition(transform.position + new Vector3(horizontalMove, spdY, 0));
+        rigidbody2D.MovePosition(transform.position + new Vector3(horizontalMove * GetMovementMult(), spdY, 0));
 
         if (!climb)
         {
@@ -195,16 +236,19 @@ public class PlayerController : MonoBehaviour
             spdY = verticalAxis / 5f;
         }
 
-        touchesGround = touchesGroundNow;
+        if (previousState != PlayerState.JUMP && currentState == PlayerState.JUMP) touchesGround = false;
+        //else if (currentState == PlayerState.CLIMB) touchesGround = true;
+        else touchesGround = touchesGroundNow;
+
         jump = false;
-        attack = false;
+        if (currentState != PlayerState.BOW_AIM) attack = false;
     }
 
-    bool CheckGroundCollision()
+    bool CheckGroundCollision(Vector2 checkPositon)
     {
         Vector2 checkPos = new Vector2
-            (gameObject.transform.position.x + GroundCheck.x,
-            gameObject.transform.position.y + GroundCheck.y);
+            (gameObject.transform.position.x + checkPositon.x,
+            gameObject.transform.position.y + checkPositon.y);
         Collider2D[] colliders = Physics2D.OverlapBoxAll(checkPos, new Vector2(0.4f,0.05f), Ground);
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -245,7 +289,7 @@ public class PlayerController : MonoBehaviour
      * 
      */
 
-    public enum PlayerState { STAND, CROUCH, CROUCH_ATK, CROUCH_MOVE, ATK, ITEM, BOW, BOW_SHOOT, JUMP, LAND, JUMP_ATK, CLIMB, FALL }
+    public enum PlayerState { STAND, CROUCH, CROUCH_ATK, CROUCH_MOVE, ATK, ITEM, BOW_AIM, JUMP, CLIMB, FALL }
     public enum HeldItemType { NONE, THROW, POTION, THROW_POTION, BOW }
 
     void EnterState(PlayerState newState)
@@ -271,16 +315,28 @@ public class PlayerController : MonoBehaviour
                     ApplyJumpForce();
                     break;
                 case PlayerState.ATK:
-                    if (renderer.flipX) attackL.EnableOnce();
-                    else attackR.EnableOnce();
+                    if (renderer.flipX)
+                    {
+                        attackL.EnableOnce();
+                        attackL2.EnableOnce();
+                    }
+                    else
+                    {
+                        attackR.EnableOnce();
+                        attackR2.EnableOnce();
+                    }
                     break;
                 case PlayerState.CROUCH_ATK:
-                    if (renderer.flipX) attackL.EnableOnce();
-                    else attackR.EnableOnce();
-                    break;
-                case PlayerState.JUMP_ATK:
-                    if (renderer.flipX) attackL.EnableOnce();
-                    else attackR.EnableOnce();
+                    if (renderer.flipX)
+                    {
+                        attackL.EnableOnce();
+                        attackL2.EnableOnce();
+                    }
+                    else
+                    {
+                        attackR.EnableOnce();
+                        attackR2.EnableOnce();
+                    }
                     break;
             }
 
@@ -321,18 +377,6 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Jump", true);
                     animator.SetBool("Jump2", false);
                     animator.SetBool("Land", false);
-                    animator.SetBool("Climb", false);
-                    break;
-                case PlayerState.LAND:
-                    animator.SetBool("Move", false);
-                    animator.SetBool("Crouch", false);
-                    animator.SetBool("Inventory", false);
-                    animator.SetBool("Bow", false);
-                    animator.SetInteger("BowAngle", 0);
-                    animator.SetBool("Attack", false);
-                    animator.SetBool("Jump", false);
-                    animator.SetBool("Jump2", false);
-                    animator.SetBool("Land", true);
                     animator.SetBool("Climb", false);
                     break;
                 case PlayerState.CROUCH:
@@ -395,28 +439,28 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Land", false);
                     animator.SetBool("Climb", false);
                     break;
-                case PlayerState.JUMP_ATK:
+                case PlayerState.BOW_AIM:
                     animator.SetBool("Move", false);
                     animator.SetBool("Crouch", false);
                     animator.SetBool("Inventory", false);
-                    animator.SetBool("Bow", false);
-                    animator.SetInteger("BowAngle", 0);
-                    animator.SetBool("Attack", true);
+                    animator.SetBool("Bow", true);
+                    SetBowAngle();
+                    animator.SetBool("Attack", false);
                     animator.SetBool("Jump", true);
                     animator.SetBool("Jump2", false);
                     animator.SetBool("Land", false);
                     animator.SetBool("Climb", false);
                     break;
-
             }
         }
     }
-    void UpdateState(bool jump, bool landed, bool fell, bool crouching, bool attack, bool climb)
+    void UpdateState(bool jump, bool landed, bool fell, bool crouching, bool attack, bool climb, bool bowaim)
     {
         switch (currentState)
         {
             case PlayerState.STAND:
                 if (jump) EnterState(PlayerState.JUMP);
+                else if (bowaim) EnterState(PlayerState.BOW_AIM);
                 else if (crouching) EnterState(PlayerState.CROUCH);
                 else if (fell) EnterState(PlayerState.FALL);
                 else if (attack) EnterState(PlayerState.ATK);
@@ -428,7 +472,6 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.FALL:
                 if (landed) EnterState(PlayerState.STAND);
-                else if (attack) EnterState(PlayerState.JUMP_ATK);
                 else if (climb) EnterState(PlayerState.CLIMB);
                 break;
             case PlayerState.CROUCH:
@@ -438,22 +481,45 @@ public class PlayerController : MonoBehaviour
             case PlayerState.ATK:
                 if (stateTimer > 0.4f) EnterState(PlayerState.STAND);
                 break;
-            case PlayerState.JUMP_ATK:
-                if (landed) EnterState(PlayerState.STAND);
-                break;
             case PlayerState.CROUCH_ATK:
                 if (stateTimer > 0.4f) EnterState(PlayerState.CROUCH);
                 break;
             case PlayerState.CLIMB:
                 if (jump) EnterState(PlayerState.JUMP);
-                else if (!climb) EnterState(PlayerState.FALL);
+                else if (!climb && touchesGround) EnterState(PlayerState.STAND);
+                else if (!climb && !touchesGround) EnterState(PlayerState.FALL);
+                break;
+            case PlayerState.BOW_AIM:
+                if (!bowaim) EnterState(PlayerState.STAND);
+                else SetBowAngle();
                 break;
         }
     }
 
+    float GetMovementMult()
+    {
+        float speed = pes.MoveSpeed;
+        
+        switch (currentState)
+        {
+            case PlayerState.STAND: return speed;
+            case PlayerState.CROUCH: return speed * 0.33f;
+            case PlayerState.CROUCH_ATK: return speed * 0.33f;
+            case PlayerState.CROUCH_MOVE: return speed * 0.33f;
+            case PlayerState.ATK: return speed;
+            case PlayerState.ITEM: return speed;
+            case PlayerState.BOW_AIM: return speed * 0.1f;
+            case PlayerState.JUMP: return speed;
+            case PlayerState.CLIMB: return speed;
+            case PlayerState.FALL: return speed;
+        }
+
+        return speed;
+    }
+
     public void ApplyJumpForce()
     {
-        spdY = JumpForce * jmpMult;
+        spdY = JumpForce * jmpMult * Mathf.Sqrt(pes.JumpHeight);
     }
     public void IncreaseJumpHeight()
     {
@@ -475,6 +541,8 @@ public class PlayerController : MonoBehaviour
         else heldItem = itemType;
         inventoryVisible = false;
         SetHeldItemType();
+
+        hii.Set(heldItem);
     }
     void SetHeldItemType()
     {
@@ -553,5 +621,24 @@ public class PlayerController : MonoBehaviour
 
         return Math.Abs(pRoomX - roomX) <= 1 && Math.Abs(pRoomY - roomY) <= 1;
     }
+
+    void SetBowAngle()
+    {
+        Vector3 playerScreen = cam.WorldToScreenPoint(gameObject.transform.position);
+        Vector3 mouse = Input.mousePosition;
+        Vector3 diff = new Vector3(mouse.x - playerScreen.x, mouse.y - playerScreen.y, 0);
+
+        float x = diff.x;
+        float y = diff.y;
+
+        renderer.flipX = x < 0;
+
+        x = Mathf.Abs(x);
+
+        if (y > 2 * x) animator.SetInteger("BowAngle", 2);
+        else if (2 * y > x) animator.SetInteger("BowAngle", 1);
+        else animator.SetInteger("BowAngle", 0);
+    }
+
     public bool Visible => pes.Visible;
 }

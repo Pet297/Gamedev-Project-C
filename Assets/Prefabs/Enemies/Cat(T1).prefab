@@ -107,10 +107,10 @@ GameObject:
   - component: {fileID: 4535946748948373867}
   - component: {fileID: -5560776286228504389}
   - component: {fileID: 5134481602153998168}
-  - component: {fileID: 2499317011546602917}
   - component: {fileID: 3473952662602017183}
   - component: {fileID: 3010649598557886516}
   - component: {fileID: 4505673406735363417}
+  - component: {fileID: -148707993452297850}
   m_Layer: 6
   m_Name: Cat(T1)
   m_TagString: Untagged
@@ -127,7 +127,7 @@ Transform:
   m_GameObject: {fileID: 4535946748948373866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 3839425671604997320}
   m_Father: {fileID: 0}
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f02aac2724943bb49a02aea3b4f7c65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundCheck: {x: 0, y: -0.5}
+  GroundCheck: {x: 0, y: -0.8}
   WallLeftCheck: {x: -3, y: 0}
   WallRightCheck: {x: 3, y: 0}
   Damager: {fileID: 621671144332613951}
@@ -249,32 +249,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2499317011546602917
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4535946748948373866}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 1}
-    newSize: {x: 2, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2, y: 1}
-  m_EdgeRadius: 0
 --- !u!114 &3473952662602017183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,3 +289,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c66a9eb6292cf63489d5c0d3f5baeec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &-148707993452297850
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4535946748948373866}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 2, y: 1}
+  m_Direction: 1

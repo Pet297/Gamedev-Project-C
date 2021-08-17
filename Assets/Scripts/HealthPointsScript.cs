@@ -23,7 +23,7 @@ public class HealthPointsScript : MonoBehaviour
     {
         health = MaxHealth;
         if (HealthBar != null) hbs = HealthBar.GetComponent<HealthBarScript>();
-        GameObject Player = GameObject.Find("Player");
+        GameObject Player = GameObject.FindWithTag("Player");
         if (Player != null) gss = Player.GetComponent<GameScoreScript>();
         css = GetComponent<CatSaveScript>();
     }
@@ -46,9 +46,9 @@ public class HealthPointsScript : MonoBehaviour
         if (health <= 0)
         {
             health = 0;
-            GameObject.Destroy(gameObject);
             if (gss != null) gss.Increase(PointReward);
             if (css != null) css.SaveCat();
+            GameObject.Destroy(gameObject);
         }
         UpdateHealthBar();
     }

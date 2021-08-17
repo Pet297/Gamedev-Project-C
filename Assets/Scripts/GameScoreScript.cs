@@ -8,12 +8,24 @@ public class GameScoreScript : MonoBehaviour
     int score = 0;
 
     public GameObject textObject;
+
+    public List<GameObject> saveCatIndicators;
+    List<CollectCatScript> saveCatScripts;
+    bool[] savedCats;
+
     private Text displayText;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         displayText = textObject.GetComponent<Text>();
+        saveCatScripts = new List<CollectCatScript>();
+
+        foreach (GameObject go in saveCatIndicators)
+        {
+            saveCatScripts.Add(go.GetComponent<CollectCatScript>());
+        }
+        savedCats = new bool[saveCatIndicators.Count];
     }
 
     // Update is called once per frame
@@ -33,6 +45,14 @@ public class GameScoreScript : MonoBehaviour
         UpdateText();
     }
     public int Score => score;
+
+    public void SaveCat(int index)
+    {
+        savedCats[index] = true;
+        saveCatScripts[index].GetCat();
+    }
+
+    public bool Cat0IsSaved => savedCats[0];
 
     private void UpdateText()
     {

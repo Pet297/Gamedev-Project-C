@@ -32,8 +32,8 @@ public class NutriaControllerScript : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         attackD = Damager.GetComponent<TemporalEnablerScript>();
 
-        Player = GameObject.Find("Player");
-        pc = Player.GetComponent<PlayerController>();
+        Player = GameObject.FindWithTag("Player");
+        pc = Player?.GetComponent<PlayerController>();
         renderer = gameObject.GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
     }
@@ -57,7 +57,7 @@ public class NutriaControllerScript : MonoBehaviour
 
         float horizontalMove = 0f;
 
-        if (Player != null && pc.Visible && pc.InSameRoom1(gameObject.transform.position) && !NextToPlayer)
+        if (Player != null && pc != null && pc.Visible && pc.InSameRoom1(gameObject.transform.position) && !NextToPlayer)
         {
             if (Player.transform.position.x > transform.position.x)
             {
@@ -99,9 +99,9 @@ public class NutriaControllerScript : MonoBehaviour
         return false;
     }
 
-    bool PlayerAbove => Player != null && pc.Visible && pc.InSameRoom1(gameObject.transform.position) && Player.transform.position.y - transform.position.y > 2.0f;
-    bool PlayerClose => Player != null && pc.Visible && pc.InSameRoom1(gameObject.transform.position) && Mathf.Abs(Player.transform.position.x - transform.position.x) < 4f;
-    bool NextToPlayer => Player != null && pc.Visible && pc.InSameRoom1(gameObject.transform.position) && Mathf.Abs(Player.transform.position.x - transform.position.x) < 0.7f;
+    bool PlayerAbove => Player != null && pc != null && pc.Visible && pc.InSameRoom1(gameObject.transform.position) && Player.transform.position.y - transform.position.y > 2.0f;
+    bool PlayerClose => Player != null && pc != null && pc.Visible && pc.InSameRoom1(gameObject.transform.position) && Mathf.Abs(Player.transform.position.x - transform.position.x) < 4f;
+    bool NextToPlayer => Player != null && pc != null && pc.Visible && pc.InSameRoom1(gameObject.transform.position) && Mathf.Abs(Player.transform.position.x - transform.position.x) < 0.7f;
 
     public enum NutriaState
     {

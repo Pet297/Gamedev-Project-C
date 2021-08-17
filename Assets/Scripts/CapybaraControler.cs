@@ -10,7 +10,7 @@ public class CapybaraControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.Find("Player");
+        Player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame

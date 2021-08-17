@@ -41,6 +41,11 @@ public class CollectorScript : MonoBehaviour
             case "BO_J": pc.IncreaseJumpHeight(); break;
             case "BO_D": pc.IncreaseAttackMult(); break;
 
+            case "CAT_1": gss.SaveCat(1); gss.Increase(2500); break;
+            case "CAT_2": gss.SaveCat(2); gss.Increase(2500); break;
+            case "CAT_3": gss.SaveCat(3); gss.Increase(2500); break;
+            case "CAT_4": gss.SaveCat(4); gss.Increase(2500); break;
+
             default: pis.AddItem(item); break;
         }
     }

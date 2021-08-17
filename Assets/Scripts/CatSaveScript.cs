@@ -5,11 +5,15 @@ using UnityEngine;
 public class CatSaveScript : MonoBehaviour
 {
     public GameObject cat;
+    public int index;
+
+    private GameScoreScript gss = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject Player = GameObject.FindWithTag("Player");
+        if (Player != null) gss = Player.GetComponent<GameScoreScript>();
     }
 
     // Update is called once per frame
@@ -22,8 +26,8 @@ public class CatSaveScript : MonoBehaviour
     {
         if (cat != null)
         {
-            Object.Destroy(cat);
-            //TODO: "Collect the cat"
+            GameObject.Destroy(cat);
+            gss.SaveCat(index);
         }
     }
 }

@@ -17,19 +17,19 @@ public class RatControllerScript : MonoBehaviour
     private SpriteRenderer renderer;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         animator = gameObject.GetComponent<Animator>();
         pool = gameObject.GetComponent<ObjectPoolScript>();
         renderer = gameObject.GetComponent<SpriteRenderer>();
-        Player = GameObject.Find("Player");
-        pc = Player.GetComponent<PlayerController>();
+        Player = GameObject.FindWithTag("Player");
+        pc = Player?.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Player != null && pc.Visible && pc.InSameRoom(gameObject.transform.position))
+        if (Player != null && pc != null && pc.Visible && pc.InSameRoom(gameObject.transform.position))
         {
             if (Player.transform.position.x > transform.position.x) renderer.flipX = true;
             else renderer.flipX = false;
@@ -53,7 +53,7 @@ public class RatControllerScript : MonoBehaviour
         bool flipX = renderer.flipX;
         GameObject magic = pool.GetPooledObject();
 
-        if (magic != null)
+        if (magic != null && Player != null)
         {
             Vector2 toTarget = new Vector2(Player.transform.position.x - gameObject.transform.position.x, Player.transform.position.y - gameObject.transform.position.y);
             Vector2 toTarget2 = new Vector2(toTarget.x, toTarget.y + toTarget.magnitude / 6f);

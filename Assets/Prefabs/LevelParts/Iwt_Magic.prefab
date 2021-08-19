@@ -70,6 +70,9 @@ GameObject:
   - component: {fileID: 6319805102437100537}
   - component: {fileID: 7756353730913428493}
   - component: {fileID: -6308314639701396789}
+  - component: {fileID: 3950229280965656938}
+  - component: {fileID: 7938157612135601655}
+  - component: {fileID: 7092077421018129633}
   m_Layer: 14
   m_Name: Iwt_Magic
   m_TagString: Untagged
@@ -202,3 +205,50 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3950229280965656938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6319805102437100542}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a7e3df94d6f22439a0f61d26f3ab07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AffectedLayer:
+    serializedVersion: 2
+    m_Bits: 192
+  DealtDamage: 30
+  SelfDestroy: 0
+--- !u!114 &7938157612135601655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6319805102437100542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa3c30f0cba993478195b81c916fbd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolInstance: IWTM
+  objectToPool: {fileID: 5522540178562016831, guid: 29c4a93f37820da4380ca01368ac3614, type: 3}
+  amountToPool: 30
+--- !u!114 &7092077421018129633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6319805102437100542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa3c30f0cba993478195b81c916fbd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolInstance: IWTE
+  objectToPool: {fileID: 8324419791075866780, guid: 683002d775f4624458d3e14e9e5e9119, type: 3}
+  amountToPool: 30

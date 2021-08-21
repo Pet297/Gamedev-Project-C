@@ -15,6 +15,10 @@ public class RoomParentScript : MonoBehaviour
     void Start()
     {
         pc = Player.GetComponent<PlayerController>();
+        foreach (Transform child in gameObject.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame

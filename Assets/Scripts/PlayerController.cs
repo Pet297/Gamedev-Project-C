@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
     bool bow = false;
     bool climb = false;
     float stateTimer = 0f;
+    bool frame2 = false;
     void Update()
     {
 
@@ -125,9 +126,20 @@ public class PlayerController : MonoBehaviour
 
         float horizontalMove = Input.GetAxisRaw("Horizontal") * MaxSpeed;
 
-        if (currentState != PlayerState.BOW_AIM && Mathf.Abs(horizontalMove) > 0.1f) renderer.flipX = horizontalMove < 0;
+        if (currentState != PlayerState.BOW_AIM && Mathf.Abs(horizontalMove) > 0.1f)
+        {
+            renderer.flipX = horizontalMove < 0;
+            animator.SetBool("Move", true);
+        }
+        else animator.SetBool("Move", false);
 
         float verticalAxis = Input.GetAxisRaw("Vertical");
+
+        if (currentState == PlayerState.CLIMB && Mathf.Abs(horizontalMove) + Mathf.Abs(verticalAxis) > 0.1f)
+        {
+            animator.SetBool("Frame2", frame2);
+            frame2 = !frame2;
+        }
 
         bool landed = !touchesGround && touchesGroundNow;
         bool fell = touchesGround && !touchesGroundNow;
@@ -344,7 +356,6 @@ public class PlayerController : MonoBehaviour
             switch (currentState)
             {
                 case PlayerState.STAND:
-                    animator.SetBool("Move", false);
                     animator.SetBool("Crouch", false);
                     animator.SetBool("Inventory", false);
                     animator.SetBool("Bow", false);
@@ -356,7 +367,6 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Climb", false);
                     break;
                 case PlayerState.JUMP:
-                    animator.SetBool("Move", false);
                     animator.SetBool("Crouch", false);
                     animator.SetBool("Inventory", false);
                     animator.SetBool("Bow", false);
@@ -368,7 +378,6 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Climb", false);
                     break;
                 case PlayerState.FALL:
-                    animator.SetBool("Move", false);
                     animator.SetBool("Crouch", false);
                     animator.SetBool("Inventory", false);
                     animator.SetBool("Bow", false);
@@ -380,7 +389,6 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Climb", false);
                     break;
                 case PlayerState.CROUCH:
-                    animator.SetBool("Move", false);
                     animator.SetBool("Crouch", true);
                     animator.SetBool("Inventory", false);
                     animator.SetBool("Bow", false);
@@ -392,7 +400,6 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Climb", false);
                     break;
                 case PlayerState.CROUCH_ATK:
-                    animator.SetBool("Move", false);
                     animator.SetBool("Crouch", true);
                     animator.SetBool("Inventory", false);
                     animator.SetBool("Bow", false);
@@ -416,7 +423,6 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Climb", false);
                     break;
                 case PlayerState.CLIMB:
-                    animator.SetBool("Move", false);
                     animator.SetBool("Crouch", false);
                     animator.SetBool("Inventory", false);
                     animator.SetBool("Bow", false);
@@ -428,7 +434,6 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Climb", true);
                     break;
                 case PlayerState.ATK:
-                    animator.SetBool("Move", false);
                     animator.SetBool("Crouch", false);
                     animator.SetBool("Inventory", false);
                     animator.SetBool("Bow", false);
@@ -440,7 +445,6 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Climb", false);
                     break;
                 case PlayerState.BOW_AIM:
-                    animator.SetBool("Move", false);
                     animator.SetBool("Crouch", false);
                     animator.SetBool("Inventory", false);
                     animator.SetBool("Bow", true);

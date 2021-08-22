@@ -11,6 +11,8 @@ public class SquirelControlerScript : MonoBehaviour
     private GameObject Player;
     private PlayerController pc;
 
+    private PotionEffectsScript pes;
+
     private float AttackTime = 0;
     private bool Attacked = false;
     private Animator animator;
@@ -25,6 +27,7 @@ public class SquirelControlerScript : MonoBehaviour
         renderer = gameObject.GetComponent<SpriteRenderer>();
         Player = GameObject.FindWithTag("Player");
         pc = Player?.GetComponent<PlayerController>();
+        pes = GetComponent<PotionEffectsScript>();
     }
 
     // Update is called once per frame
@@ -35,7 +38,7 @@ public class SquirelControlerScript : MonoBehaviour
             if (Player.transform.position.x > transform.position.x) renderer.flipX = true;
             else renderer.flipX = false;
 
-            AttackTime += Time.deltaTime;
+            AttackTime += Time.deltaTime * pes.MoveSpeed;
             if (AttackTime > AttackFrequency)
             {
                 animator.SetBool("Attack", true);

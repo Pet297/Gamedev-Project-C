@@ -196,6 +196,9 @@ MonoBehaviour:
   MaxHealth: 60
   InvincibilitySeconds: 0.4
   HealthBar: {fileID: 0}
+  canvasHud: {fileID: 0}
+  canvasEnd: {fileID: 0}
+  endText: {fileID: 0}
   PointReward: 600
 --- !u!114 &-5742492266611788409
 MonoBehaviour:
@@ -314,4 +317,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8c2abd989b7e343b34f0cc8eb9e154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnableTime: 0.3
+  EnableTime: 0.1

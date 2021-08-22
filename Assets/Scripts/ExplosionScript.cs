@@ -20,13 +20,14 @@ public class ExplosionScript : MonoBehaviour
         {
             GameObject collider = colliders[i].gameObject;
             AbstractAfectable af = (AbstractAfectable)colliders[i].GetComponent(typeof(AbstractAfectable));
-            Debug.Log("exploding1");
 
             if (af != null)
             {
-                Debug.Log("exploding2");
                 af.OnExplode();
             }
+
+            HealthPointsScript hps = (colliders[i].GetComponent(typeof(HealthPointsScript)) as HealthPointsScript);
+            if (hps != null) hps.GetHit(150);
         }
     }
 

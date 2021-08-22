@@ -23,6 +23,7 @@ public class NutriaControllerScript : MonoBehaviour
     private Animator animator;
 
     private Rigidbody2D rigidbody2D;
+    private PotionEffectsScript pes;
 
     bool touchesGround = false;
 
@@ -30,6 +31,7 @@ public class NutriaControllerScript : MonoBehaviour
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        pes = GetComponent<PotionEffectsScript>();
         attackD = Damager.GetComponent<TemporalEnablerScript>();
 
         Player = GameObject.FindWithTag("Player");
@@ -40,7 +42,7 @@ public class NutriaControllerScript : MonoBehaviour
 
     void Update()
     {
-        stateTimer += Time.deltaTime;
+        if (pc.Visible) stateTimer += Time.deltaTime;
     }
 
     // Update is called once per frame
@@ -73,7 +75,7 @@ public class NutriaControllerScript : MonoBehaviour
             }
         }
 
-        rigidbody2D.MovePosition(transform.position + new Vector3(horizontalMove, speedY, 0));
+        rigidbody2D.MovePosition(transform.position + new Vector3(horizontalMove * pes.MoveSpeed, speedY, 0));
 
         speedY -= Gravity;
         if (speedY < TerminalVelocity) speedY = TerminalVelocity;

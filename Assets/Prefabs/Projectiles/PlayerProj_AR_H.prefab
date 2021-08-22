@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AffectedBy:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
 --- !u!114 &2765712088150770648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3086fe0f8f741e45a90aea84322ecdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AffectedLayer:
+    serializedVersion: 2
+    m_Bits: 32631
 --- !u!114 &4540809859173596614
 MonoBehaviour:
   m_ObjectHideFlags: 0

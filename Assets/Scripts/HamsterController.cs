@@ -25,6 +25,7 @@ public class HamsterController : MonoBehaviour
     private Animator animator;
 
     private Rigidbody2D rigidbody2D;
+    private PotionEffectsScript pes;
 
     bool touchesGround = false;
 
@@ -32,6 +33,7 @@ public class HamsterController : MonoBehaviour
     void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        pes = GetComponent<PotionEffectsScript>();
         attackD = Damager.GetComponent<TemporalEnablerScript>();
 
         Player = GameObject.FindWithTag("Player");
@@ -42,7 +44,7 @@ public class HamsterController : MonoBehaviour
 
     void Update()
     {
-        stateTimer += Time.deltaTime;
+        if (pc.Visible) stateTimer += Time.deltaTime * pes.MoveSpeed;
     }
 
     // Update is called once per frame
@@ -63,7 +65,7 @@ public class HamsterController : MonoBehaviour
 
         float horizontalMove = 0f;
 
-        if (Player != null && pc != null && pc.Visible && pc.InSameRoom1(gameObject.transform.position) && !NextToPlayer)
+        if (Player != null && pc != null && pc.Visible && pc.InSameRoom(gameObject.transform.position) && !NextToPlayer)
         {
             if (Player.transform.position.x > transform.position.x)
             {
@@ -79,7 +81,7 @@ public class HamsterController : MonoBehaviour
             }
         }
 
-        rigidbody2D.MovePosition(transform.position + new Vector3(horizontalMove, speedY, 0));
+        rigidbody2D.MovePosition(transform.position + new Vector3(horizontalMove * pes.MoveSpeed, speedY, 0));
 
         speedY -= Gravity;
         if (speedY < TerminalVelocity) speedY = TerminalVelocity;

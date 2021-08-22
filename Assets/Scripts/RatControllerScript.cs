@@ -16,6 +16,8 @@ public class RatControllerScript : MonoBehaviour
     private ObjectPoolScript pool;
     private SpriteRenderer renderer;
 
+    private PotionEffectsScript pes;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,6 +26,7 @@ public class RatControllerScript : MonoBehaviour
         renderer = gameObject.GetComponent<SpriteRenderer>();
         Player = GameObject.FindWithTag("Player");
         pc = Player?.GetComponent<PlayerController>();
+        pes = GetComponent<PotionEffectsScript>();
     }
 
     // Update is called once per frame
@@ -35,7 +38,7 @@ public class RatControllerScript : MonoBehaviour
             else renderer.flipX = false;
 
 
-            AttackTime += Time.deltaTime;
+            AttackTime += Time.deltaTime * pes.MoveSpeed;
             if (AttackTime > AttackFrequency)
             {
                 animator.SetBool("Shoot", true);

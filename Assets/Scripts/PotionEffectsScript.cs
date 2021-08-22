@@ -72,7 +72,7 @@ public class PotionEffectsScript : MonoBehaviour
     }
 
     public float JumpHeight => ((agilityEffectTime > 0f) ? 2 : 1);
-    public float Strength => ((strengthEffectTime > 0f) ? 2 : 1);
+    public float Strength => ((strengthEffectTime > 0f) ? 2.5f : 1);
     public float MoveSpeed => ((frozenEffectTime > 0f) ? 0.33f : 1);
     public bool Visible => invisibleEffectTime < 0f;
 

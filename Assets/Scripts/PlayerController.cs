@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public int RoomSizeX = 40;
     public int RoomSizeY = 20;
 
+    public bool GodMode;
+
     Vector2 GroundCheck1;
     Vector2 GroundCheck2;
 
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInventoryScript inventory;
     private HealthPointsScript hps;
     private PotionEffectsScript pes;
+    private CapsuleCollider2D cc2;
     private Camera cam;
 
     private HeldItemImage hii;
@@ -65,14 +68,15 @@ public class PlayerController : MonoBehaviour
         attackR2 = AttackR2.GetComponent<TemporalEnablerScript>();
         attackL2 = AttackL2.GetComponent<TemporalEnablerScript>();
         hii = SelectedItemDisplay.GetComponent<HeldItemImage>();
+        cc2 = GetComponent<CapsuleCollider2D>();
 
         renderer = GetComponent<SpriteRenderer>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         inventory = GetComponent<PlayerInventoryScript>();
         hps = GetComponent<HealthPointsScript>();
-        pes = GetComponent<PotionEffectsScript>();
         cam = Camera.GetComponent<Camera>();
+        pes = GetComponent<PotionEffectsScript>();
 
         throwers.Clear();
         throwers.Add("BOMB", Thrower_Bomb.GetComponent<PlayerThrowScript>());
@@ -90,6 +94,14 @@ public class PlayerController : MonoBehaviour
 
         GroundCheck1 = GroundCheck + new Vector2(0.15f, 0f);
         GroundCheck2 = GroundCheck + new Vector2(-0.15f, 0f);
+
+        //GOD MODE
+        if (GodMode)
+        {
+            hps.IncreaseMax(100000);
+            dmgMult = 10000;
+            IncreaseAttackMult();
+        }
     }
 
     bool jump = false;
@@ -106,7 +118,7 @@ public class PlayerController : MonoBehaviour
         InventoryObject?.SetActive(inventoryVisible);
 
         jump = jump || Input.GetButtonDown("Jump");
-        attack = attack || Input.GetButtonDown("Fire1");
+        attack = !inventoryVisible && (attack || Input.GetButtonDown("Fire1"));
 
         bool nattack = !Input.GetButton("Fire1");
 
@@ -121,6 +133,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        //GOD MODE
+        if (GodMode && jump) ApplyJumpForce();
+
         bool touchesGroundNow = CheckGroundCollision(GroundCheck) || CheckGroundCollision(GroundCheck1) || CheckGroundCollision(GroundCheck2);
         bool canClimb = CheckLadderCollision();
 
@@ -139,6 +154,17 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("Frame2", frame2);
             frame2 = !frame2;
+        }
+
+        if (currentState == PlayerState.CROUCH || currentState == PlayerState.CROUCH_ATK || currentState == PlayerState.CROUCH_MOVE)
+        {
+            cc2.size = new Vector2(0.45f,0.75f);
+            cc2.offset = new Vector2(0f, -0.625f);
+        }
+        else
+        {
+            cc2.size = new Vector2(0.45f, 1.5f);
+            cc2.offset = new Vector2(0f, -0.25f);
         }
 
         bool landed = !touchesGround && touchesGroundNow;
@@ -164,6 +190,8 @@ public class PlayerController : MonoBehaviour
                 case "AR_M": ShootProjectile(heldItem); break;
             }
 
+            inventory.RemoveItem(heldItem);
+            if (inventory.GetCount(heldItem) == 0) SelectInventoryItem("");
             bowaim = false;
         }
 
@@ -197,7 +225,6 @@ public class PlayerController : MonoBehaviour
                 if (heldItem == "BOMB")
                 {
                     inventory.RemoveItem(heldItem);
-
                     SelectInventoryItem("");
                 }
 
@@ -228,6 +255,12 @@ public class PlayerController : MonoBehaviour
                     case "AF_A": ShootProjectile(heldItem); break;
                 }
 
+                if (heldItem == "PT_V")
+                {
+                    inventory.RemoveItem(heldItem);
+                    SelectInventoryItem("");
+                }
+
                 attack = false;
             }
         }
@@ -249,7 +282,6 @@ public class PlayerController : MonoBehaviour
         }
 
         if (previousState != PlayerState.JUMP && currentState == PlayerState.JUMP) touchesGround = false;
-        //else if (currentState == PlayerState.CLIMB) touchesGround = true;
         else touchesGround = touchesGroundNow;
 
         jump = false;
@@ -536,6 +568,8 @@ public class PlayerController : MonoBehaviour
         dmgMult+=0.2001f;
         damagerR.DealtDamage = (int)(30 * dmgMult);
         damagerL.DealtDamage = (int)(30 * dmgMult);
+        damagerR2.DealtDamage = (int)(30 * dmgMult);
+        damagerL2.DealtDamage = (int)(30 * dmgMult);
     }
 
     string heldItem = "";

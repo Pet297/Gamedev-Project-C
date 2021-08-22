@@ -16,6 +16,8 @@ public class BeaverControlerScript : MonoBehaviour
     private ObjectPoolScript pool;
     private SpriteRenderer renderer;
 
+    private PotionEffectsScript pes;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,6 +26,7 @@ public class BeaverControlerScript : MonoBehaviour
         renderer = gameObject.GetComponent<SpriteRenderer>();
         Player = GameObject.FindWithTag("Player");
         pc = Player?.GetComponent<PlayerController>();
+        pes = GetComponent<PotionEffectsScript>();
     }
 
     // Update is called once per frame
@@ -34,7 +37,7 @@ public class BeaverControlerScript : MonoBehaviour
             if (Player.transform.position.x > transform.position.x) renderer.flipX = true;
             else renderer.flipX = false;
 
-            ThrowTime += Time.deltaTime;
+            ThrowTime += Time.deltaTime * pes.MoveSpeed;
             if (ThrowTime > ThrowFrequency)
             {
                 animator.SetBool("ThrowLog", true);

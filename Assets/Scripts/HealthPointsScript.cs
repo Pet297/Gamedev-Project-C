@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class HealthPointsScript : MonoBehaviour
 {
@@ -11,6 +13,11 @@ public class HealthPointsScript : MonoBehaviour
     public GameObject HealthBar = null;
     private HealthBarScript hbs = null;
     private CatSaveScript css = null;
+
+    public GameObject canvasHud = null;
+    public GameObject canvasEnd = null;
+    public TextMeshProUGUI endText;
+
 
     //public GameObject Player = null;
     public int PointReward = 0;
@@ -48,7 +55,15 @@ public class HealthPointsScript : MonoBehaviour
             health = 0;
             if (gss != null) gss.Increase(PointReward);
             if (css != null) css.SaveCat();
-            GameObject.Destroy(gameObject);
+
+            if (gameObject.tag == "Player")
+            {
+                gameObject.SetActive(false);
+                canvasHud.SetActive(false);
+                canvasEnd.SetActive(true);
+                endText.text = gameObject.GetComponent<GameScoreScript>().GetDeathMessage();
+            }
+            else GameObject.Destroy(gameObject);
         }
         UpdateHealthBar();
     }

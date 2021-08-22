@@ -61,4 +61,23 @@ public class GameScoreScript : MonoBehaviour
         if (score < 0) toDisplay = "-" + toDisplay;
         displayText.text = toDisplay;
     }
+
+    int CatCount
+    {
+        get
+        {
+            int ct = 0;
+            foreach (bool b in savedCats) if (b) ct++;
+            return ct;
+        }
+    }
+
+    public string GetCompletionText()
+    {
+        return $"You won!!\n\nYour got score of {score}.\nMax possible score is 1086500.\n(With easter egg, it's 1142500)\n\nIn total, you saved {CatCount} cats out of 10.\n\nThe ending mechanic isn't implemented. If you saved a lot\nof cats, people from your vilage celebrate you.\nIf you didn't kill almost any rodent and didn't steal their loot,\nsome of them became friendlier.\nIf you killed 1 cat, it's an accident.\nIf you killed more (or even all 6), you are a monster.\n\nTo exit, press escape.";
+    }
+    public string GetDeathMessage()
+    {
+        return $"You died as a hero!!\n\nYour got score of {score}\n\nIn total, you saved {CatCount} cats out of 10.{(CatCount > 0 ? $"\nThose cats were recaptured and continue to serve the rodents." : "")}\n\nThe game over mechanic isn't implemented.\n\nTo exit, press escape.\n";
+    }
 }

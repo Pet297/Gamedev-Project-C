@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 631b3a55cf54f1b41b2c6bf2e58af475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThrowFrequency: 7
+  ThrowFrequency: 7.1
   ThrowDelay: 0.7
 --- !u!114 &1409519000658309165
 MonoBehaviour:
@@ -178,6 +178,9 @@ MonoBehaviour:
   MaxHealth: 750
   InvincibilitySeconds: 0.4
   HealthBar: {fileID: 0}
+  canvasHud: {fileID: 0}
+  canvasEnd: {fileID: 0}
+  endText: {fileID: 0}
   PointReward: 1500
 --- !u!114 &3037773788534156476
 MonoBehaviour:

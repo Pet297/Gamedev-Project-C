@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8498954688885156981}
   - component: {fileID: 5737654744194068541}
   - component: {fileID: -6087180302331288063}
+  - component: {fileID: 8960970849807759470}
   m_Layer: 10
   m_Name: Projectile_Mouse(T2)
   m_TagString: Untagged
@@ -153,3 +154,16 @@ MonoBehaviour:
   WearOffStart: 0.5
   WearOffLength: 2
   Speed: 6
+--- !u!114 &8960970849807759470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245787182372251174}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f137dc3f1d94fc94182f37b9c95d992c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoDisableTime: 10

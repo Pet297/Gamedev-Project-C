@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5948066573490298259}
   - component: {fileID: -371086226945572772}
   - component: {fileID: 4599767071926160111}
+  - component: {fileID: -7434333496347393652}
   m_Layer: 10
   m_Name: Projectile_Rat(T1)
   m_TagString: Untagged
@@ -150,3 +151,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &-7434333496347393652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8777319324588148015}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f137dc3f1d94fc94182f37b9c95d992c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoDisableTime: 10

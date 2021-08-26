@@ -39,7 +39,7 @@ public class GuineaPigControler : MonoBehaviour
 
 
             AttackTime += Time.deltaTime * pes.MoveSpeed;
-            animator.SetBool("AimHigh", (Player.transform.position.y - transform.position.y > -1f) && Mathf.Abs(Player.transform.position.y - transform.position.y) > Mathf.Abs(Player.transform.position.x - transform.position.x));
+            animator.SetBool("AimHigh", (Player.transform.position.y - transform.position.y > -2f) && Mathf.Abs(Player.transform.position.y - transform.position.y) > Mathf.Abs(Player.transform.position.x - transform.position.x));
 
             if (AttackTime > AttackFrequency)
             {

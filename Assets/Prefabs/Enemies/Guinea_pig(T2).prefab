@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970ed9b03bd081646992f03365d4e245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackFrequency: 4
+  AttackFrequency: 5.3
   AttackDelay: 0.5
 --- !u!61 &3208139909085125373
 BoxCollider2D:
@@ -178,6 +178,9 @@ MonoBehaviour:
   MaxHealth: 450
   InvincibilitySeconds: 0.3
   HealthBar: {fileID: 0}
+  canvasHud: {fileID: 0}
+  canvasEnd: {fileID: 0}
+  endText: {fileID: 0}
   PointReward: 600
 --- !u!114 &-3506213952197640939
 MonoBehaviour:

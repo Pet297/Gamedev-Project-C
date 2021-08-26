@@ -127,7 +127,7 @@ MonoBehaviour:
   Damager: {fileID: 8439169775117032051}
   TerminalVelocity: -0.2
   Gravity: 0.1
-  MaxSpeed: 0.2
+  MaxSpeed: 0.17
   Ground:
     serializedVersion: 2
     m_Bits: 256
@@ -291,7 +291,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4, y: 1}
+  m_Size: {x: 0.8, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &6792673988403049784
 MonoBehaviour:

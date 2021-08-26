@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2436252027048467555}
   - component: {fileID: 5619500032792518416}
   - component: {fileID: 9079891082665702642}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Attacker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4, y: 1}
+  m_Size: {x: 0.8, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &9079891082665702642
 MonoBehaviour:
@@ -221,7 +221,7 @@ MonoBehaviour:
   Damager: {fileID: 1238705861580573486}
   TerminalVelocity: -0.2
   Gravity: 0.1
-  MaxSpeed: 0.2
+  MaxSpeed: 0.17
   Ground:
     serializedVersion: 2
     m_Bits: 256
